@@ -1,68 +1,81 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# M.E.R.N Stack Seed Project with JWT Auth
 
-## Available Scripts
+M.E.R.N: Mongo, Express, React, Node Stack
 
-In the project directory, you can run:
+This is a single page application (SPA) GUI and Node Express API server.
 
-### `yarn start`
+The server and GUI are coded to authenticate users with username and password.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Authentication info is stored in a JSON Web Token.  The server is session free.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The app currently supports:
+* New User sign up with a username and password
+* Login
+* Logout
+* Auto log out if refresh token is expired when request to protected URL is made
+* Auto creation of new auth token if refresh token is still valid (so if a user is using the app they will not be logged out if they have not made a protected api call within `ACCESS_TOKEN_DURATION`)
 
-### `yarn test`
+Missing from app:
+* Auto logout due to inactivity
+* Profile page with Change password screen
+* Profile page with Change username screen
+* Profile Picture/avatar upload
+* Delete account page
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+App can be run locally by:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. renaming file `.env_sample` to `.env`
+2. From project root directory, run:
+   1. `npm i`
+   2. `npm run seed` (to seed the mongo DB - make sure mongo is running)
+   3.  `npm start`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+or can be used on heroku at:
+https://booklist-cnr.herokuapp.com/
 
-### `yarn eject`
+Signup with your own account on the sign up page: https://booklist-cnr.herokuapp.com/signup
+or login with
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+username: `demo1`   
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+password: `12345678`
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Dependency Doc Links
 
-## Learn More
+### Client
+* SPA Framework
+  * https://reactjs.org/
+* CSS
+  * https://bootswatch.com/
+* Component Framework
+  * https://react-bootstrap.github.io/
+  * https://getbootstrap.com/
+* Forms
+  * https://jaredpalmer.com/formik/
+  * Validation: https://www.npmjs.com/package/yup
+* JWT (JSON Web Token) handling
+  * Client
+    * https://github.com/eezing/jwt-jot
+    * https://www.npmjs.com/package/jwt-jot
+  * Server
+    * jsonwebtoken: https://github.com/auth0/node-jsonwebtoken#readme
+  * JWT testing: https://jwt.io/
+* AJAX
+  * https://www.npmjs.com/package/axios
+* Routing
+  * https://reacttraining.com/react-router/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Server
+* Auth
+  * http://www.passportjs.org/
+  * http://www.passportjs.org/docs/configure/
+  * http://www.passportjs.org/packages/passport-jwt/
+  * https://www.npmjs.com/package/bcrypt
+* Data
+  * https://www.mongodb.com/
+  * https://mongoosejs.com/
+* Server
+  * https://expressjs.com/
