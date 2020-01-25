@@ -7,7 +7,7 @@ import * as yup from 'yup';
 
 import { onLogin } from '../../redux/actions'
 import API from '../../api'
-import {ServerError} from '../../components/Form';
+import { ServerError } from '../../components/Form';
 
 
 const schema = yup.object({
@@ -37,13 +37,27 @@ const Signup = (props) => {
     >
         <Modal.Header closeButton>
             <Modal.Title id="signup-form">
-                Reading List Signup
+                Melanoscan Signup
         </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <h5 className="card-title">Signup to create your reading list</h5>
+            <h5 className="card-title">Signup to Create Profile</h5>
             <Formik
-                initialValues={{ firstName: '', lastName: '', email: '', username:'', password: '' }}
+                initialValues={{
+                    first_Name: '',
+                    lastName: '',
+                    email: '',
+                    enterprise: 0,
+                    street_address: '',
+                    city: '',
+                    state: '',
+                    zip: '',
+                    work_phone: '',
+                    cell_phone: '',
+                    username: '',
+                    password: '',
+                    check: false
+                }}
                 validationSchema={schema}
                 onSubmit={async (values, formikBag) => {
                     try {
@@ -71,7 +85,7 @@ const Signup = (props) => {
                     /* and other goodies */
                 }) => (
                         <Form noValidate onSubmit={handleSubmit}>
-                                                        <ServerError axiosError={status} />
+                            <ServerError axiosError={status} />
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="signupFirstName">
@@ -91,8 +105,6 @@ const Signup = (props) => {
                                         {errors.firstName && touched.firstName && errors.firstName}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
                                 <Form.Group as={Col} controlId="signupLastName">
                                     <Form.Label>Last name</Form.Label>
                                     <Form.Control
@@ -111,6 +123,7 @@ const Signup = (props) => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
+
                             <Form.Row>
                                 <Form.Group as={Col} controlId="signupEmail">
                                     <Form.Label>Email address</Form.Label>
@@ -129,6 +142,129 @@ const Signup = (props) => {
                                         {errors.email && touched.email && errors.email}
                                     </Form.Control.Feedback>
                                 </Form.Group>
+                                <Form.Group as={Col} controlId="signupAddress">
+                                    <Form.Label>Street address</Form.Label>
+                                    <Form.Control
+                                        required
+                                        autoComplete='address'
+                                        name='address'
+                                        type="address"
+                                        placeholder="Street address"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.street_address}
+                                        isInvalid={!!errors.street_address}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.street_address && touched.street_address && errors.street_address}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} md="4" controlId="workPhone">
+                                    <Form.Label>Work Phone</Form.Label>
+                                    <Form.Control
+                                        required
+                                        autoComplete='phone'
+                                        name='phone'
+                                        type="phone"
+                                        placeholder="Work Phone"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.work_phone}
+                                        isInvalid={!!errors.work_phone}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.work_phone && touched.work_phone && errors.work_phone}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                                <Form.Group as={Col} md="4" controlId="signupCity">
+                                    <Form.Label>City</Form.Label>
+                                    <Form.Control
+                                        required
+                                        autoComplete='city'
+                                        name='city'
+                                        type="city"
+                                        placeholder="City"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.city}
+                                        isInvalid={!!errors.city}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.city && touched.city && errors.city}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+
+                                <Form.Group as={Col} md="2" controlId="signupState">
+                                    <Form.Label>St</Form.Label>
+                                    <Form.Control
+                                        required
+                                        autoComplete='St'
+                                        name='state'
+                                        type="state"
+                                        placeholder="St"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.state}
+                                        isInvalid={!!errors.state}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.state && touched.state && errors.state}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                                <Form.Group as={Col} md="2" controlId="signupZip">
+                                    <Form.Label>Zip</Form.Label>
+                                    <Form.Control
+                                        required
+                                        autoComplete='Zip'
+                                        name='zip'
+                                        type="zip"
+                                        placeholder="Zip"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.zip}
+                                        isInvalid={!!errors.zip}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.zip && touched.zip && errors.zip}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} md="4" controlId="cellPhone">
+                                    <Form.Label>Cell Phone</Form.Label>
+                                    <Form.Control
+                                        required
+                                        autoComplete='phone'
+                                        name='phone'
+                                        type="phone"
+                                        placeholder="Cell Phone"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.cell_phone}
+                                        isInvalid={!!errors.cell_phone}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.cell_phone && touched.cell_phone && errors.cell_phone}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                                <Form.Group as={Col} md="4" controlId="type" style={{ marginTop: "2.2rem" }}>
+
+                                    <Form.Check
+                                        inline label="Enterprise"
+                                        checked={values.enterprise}
+                                        onChange={(event) => {
+                                            const value = event.target.checked ? 1 : 0
+                                            props.setState('enterprise', value);
+
+                                        }}
+
+
+                                        id="inline-checkbox-1" />
+                                </Form.Group>
+
+
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="username">

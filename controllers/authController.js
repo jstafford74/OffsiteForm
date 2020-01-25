@@ -29,7 +29,6 @@ module.exports = {
       // const match = await bcrypt.compare(req.body.password, user.passwordHash);
 
       if (user.dataValues.first_Name) {
-        debugger;
         const jwts = makeJwts(user);
 
         // await saveRefreshToken(jwts.refresh, user);

@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const calendarRoutes = require("./calendar");
-const signupRoutes = require("../signup");
+const profileRoutes = require("./profile");
 
 // Profile routes
 router.use("/calendar", calendarRoutes);
+router.use("/profile", profileRoutes);
 // router.use("/signup", signupRoutes);
 module.exports = router;

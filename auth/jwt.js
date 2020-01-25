@@ -13,8 +13,13 @@ const opts = {
 
 async function verifyCallback(jwt_payload, done) {
     let user, err;
+
     try {
-        user = await db.User.findById(jwt_payload.sub);
+        user = await db.Profile.findOne({
+            where: {
+                id: jwt_payload.sub
+            }
+        });
     } catch (error) {
         err = error
     }

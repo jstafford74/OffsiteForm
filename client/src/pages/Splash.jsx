@@ -1,36 +1,47 @@
 import React from "react";
 
 import { Button, Col, Row, Container, Jumbotron } from 'react-bootstrap';
+import MainTyping from "../components/typed";
+import PLX from "../components/Plx";
 
 export default function Splash(props) {
     return (
-        <Container>
-            <Row>
-                <Col >
-                    <Jumbotron fluid className='mt-4'>
-                        <h1 className='text-center'>Love To Read?</h1>
-                    </Jumbotron>
-                    <Row className="text-center">
-                        <Col >
-                            <Button 
-                            type="submit" 
-                            className="btn btn-primary" 
+        <>
+            <Container className='text-center'>
+                <Row >
+                    <Col >
+                        <Jumbotron  >
+                            <h1 >Melanoscan:</h1>
+                            <MainTyping />
+                        </Jumbotron>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+
+                <PLX />
+            </Container>
+
+            <Container>
+                <Row className="text-center">
+                    <Col >
+                        <Button
+                            type="submit"
+                            className="btn btn-success"
                             onClick={() => props.history.push('/signup')}
-                            >Signup</Button>
-                        </Col>
-                        <Col >
-                            <Button 
-                            type="submit" 
+
+                        >Signup</Button>
+                    </Col>
+                    <Col >
+                        <Button
+                            type="submit"
                             className="btn btn-primary"
                             onClick={() => props.history.push('/login')}
-                            >Login</Button>
-                        </Col>
-                    </Row>
-                    <Jumbotron fluid className='mt-4'>
-                        <h1 className='text-center'>We got you Cover to Cover!</h1>
-                    </Jumbotron>
-                </Col>
-            </Row>
-        </Container>
+                        >Login</Button>
+                    </Col>
+                </Row>
+
+            </Container >
+        </>
     );
 }

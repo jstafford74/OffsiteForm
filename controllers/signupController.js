@@ -49,7 +49,7 @@ const db = require("../models");
 module.exports = {
   createNew: async function (req, res) {
     try {
-      await db.Profile.create({
+      await db.Profile.bulkCreate({
         first_Name: req.body.first_Name,
         last_Name: req.body.last_Name,
         email: req.body.email,

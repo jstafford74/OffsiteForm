@@ -1,0 +1,11 @@
+
+
+.typed-cursor {
+    opacity: 1;
+    display: inline;
+    color: orange;
+    -webkit-animation: blink .3s infinite;
+    -moz-animation: blink .3s infinite;
+    animation: blink .3s infinite;
+    font-size: 2rem;
+}

@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import Splash from "./pages/Splash";
 import Login from './pages/Login';
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
+import Profile from "./pages/Profile";
+
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Signup from "./pages/Signup";
@@ -15,17 +15,18 @@ import Signup from "./pages/Signup";
 export default function App() {
   return (
     <Router>
-      <div>
+      <>
         <Nav />
-        <Switch>
-          <ConnectedPublicRoute exact path="/" component={Splash} />
-          <ConnectedPublicRoute path="/login" component={Login} />
-          <ConnectedPublicRoute path="/signup" component={Signup} />
-          <ConnectedPrivateRoute exact path="/books" component={Books} />
-          <ConnectedPrivateRoute path="/books/:id" component={Detail} />
-          <Route path="*"><NoMatch /></Route>
-        </Switch>
-      </div>
+      </>
+      <Switch>
+        <ConnectedPublicRoute exact path="/" component={Splash} />
+        <ConnectedPublicRoute path="/login" component={Login} />
+        <ConnectedPublicRoute path="/signup" component={Signup} />
+        <ConnectedPrivateRoute exact path="/profile/" component={Profile} />
+        {/* <ConnectedPrivateRoute path="/books/:id" component={Detail} /> */}
+        <Route path="*"><NoMatch /></Route>
+      </Switch>
+
     </Router>
 
   );
@@ -56,8 +57,8 @@ function PrivateRoute({ component: Component, ...rest }) {
 
 const ConnectedPrivateRoute = connect(
   // mapStateToProps
-  state => ({user: state.user.details})
-  )(PrivateRoute);
+  state => ({ user: state.user.details })
+)(PrivateRoute);
 
 // A wrapper for <Route> that redirects to the books 
 // screen if you're authenticated.
@@ -72,7 +73,7 @@ function PublicRoute({ component: Component, ...rest }) {
         ) : (
             <Redirect
               to={{
-                pathname: "/books"
+                pathname: "/profile"
               }}
             />
           )
@@ -83,5 +84,5 @@ function PublicRoute({ component: Component, ...rest }) {
 
 const ConnectedPublicRoute = connect(
   // mapStateToProps
-  state => ({user: state.user.details})
-  )(PublicRoute);
+  state => ({ user: state.user.details })
+)(PublicRoute);

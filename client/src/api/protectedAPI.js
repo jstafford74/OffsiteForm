@@ -6,20 +6,16 @@ import { onLogout } from '../redux/actions';
 
 export default {
     // Gets all books
-    getBooks: function () {
-        return axiosP.get("/books");
+    getDates: function () {
+        return axiosP.get("/calendar");
     },
     // Gets the book with the given id
-    getBook: function (id) {
-        return axiosP.get("/books/" + id);
+    getProfile: function () {
+        return axiosP.get("/profile/");
     },
     // Deletes the book with the given id
-    deleteBook: function (id) {
+    saveDate: function (id) {
         return axiosP.delete("/books/" + id);
-    },
-    // Saves a book to the database
-    saveBook: function (bookData) {
-        return axiosP.post("/books", bookData);
     }
 };
 

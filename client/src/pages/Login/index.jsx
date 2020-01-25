@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Button, Col, Form, Modal } from 'react-bootstrap';
+import { Button, Col, Form, Modal,Row  } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -20,17 +20,17 @@ const Login = (props) => {
         show={true}
         onHide={() => props.history.push('/')}
         animation={false}
-        size="lg"
+        size="md"
         aria-labelledby="login-form"
         centered
     >
         <Modal.Header closeButton>
             <Modal.Title id="login-form">
-                Reading List Login
+                Melanoscan Profile Login
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            <h5 className="card-title">Login to your reading list</h5>
+        <Modal.Body >
+            <h5 className="card-title">Please enter username & password</h5>
             <Formik
                 initialValues={{ username: '', password: '' }}
                 validationSchema={schema}
@@ -61,43 +61,52 @@ const Login = (props) => {
                 }) => (
                         <Form noValidate onSubmit={handleSubmit}>
                             <ServerError axiosError={status} />
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="username">
-                                    <Form.Label>Username</Form.Label>
-                                    <Form.Control
-                                        required
-                                        name='username'
-                                        autoComplete='username'
-                                        placeholder="Username"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.username}
-                                        isInvalid={!!errors.username}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.username && touched.username && errors.username}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
+                            <Form.Row className="justify-content-center">
+                                <Col sm={8} ml={2}>
+                                    <Form.Group controlId="username">
+
+                                        <Form.Label>Username</Form.Label>
+                                        <Form.Control
+                                            required
+                                            name='username'
+                                            autoComplete='username'
+                                            placeholder="Username"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.username}
+                                            isInvalid={!!errors.username}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.username && touched.username && errors.username}
+                                        </Form.Control.Feedback>
+
+                                    </Form.Group>
+                                </Col>
+                            </Form.Row >
+                            <Form.Row className="justify-content-center">
+                                <Col sm={8}>
+                                    <Form.Group controlId="Password">
+                                        <Form.Label>Password</Form.Label>
+                                        <Form.Control
+                                            autoComplete='current-password'
+                                            required
+                                            name='password'
+                                            type="password"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.password}
+                                            isInvalid={!!errors.password}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.password && touched.password && errors.password}
+                                        </Form.Control.Feedback>
+
+                                    </Form.Group>
+                                </Col>
                             </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="Password">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control
-                                        autoComplete='current-password'
-                                        required
-                                        name='password'
-                                        type="password"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.password}
-                                        isInvalid={!!errors.password}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.password && touched.password && errors.password}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Form.Row>
-                            <Button type="submit" className="btn btn-primary" disabled={isSubmitting}>Submit</Button>
+                            <Row className="justify-content-end">
+                                <Button type="submit" className="btn btn-outline-primary" disabled={isSubmitting}>Submit</Button>
+                            </Row>
                         </Form>
                     )}
             </Formik>
