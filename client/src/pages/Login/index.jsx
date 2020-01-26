@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { connect } from 'react-redux'
-import { Button, Col, Form, Modal,Row  } from 'react-bootstrap';
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -37,11 +38,8 @@ const Login = (props) => {
                 onSubmit={async (values, formikBag) => {
                     try {
                         const data = await API.login(values);
-                        if (data.success) {
-                            props.onLogin(data.tokens);
-                        } else {
-                            formikBag.setErrors(data.errors);
-                        }
+                        data.success ? props.onLogin(data.tokens) : formikBag.setErrors(data.errors);
+
                     } catch (err) {
                         formikBag.setStatus(err);
                     }
@@ -112,7 +110,7 @@ const Login = (props) => {
             </Formik>
             <Link className="link" to="/signup">Don't have an account? <span className="link-signup">Signup</span></Link>
         </Modal.Body>
-    </Modal>;
+    </Modal >;
 
 };
 

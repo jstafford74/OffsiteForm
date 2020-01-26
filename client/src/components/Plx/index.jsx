@@ -5,35 +5,34 @@ import Plx from "react-plx";
 
 const textData = [
     {
-        start: "self",
-        startOffset: "0",
-        end: "self",
-        endOffset: "50vh",
+        start: ".plx1",
+        duration: "100vh",
         easing: "easeInQuad",
         properties: [
+
             {
-                startValue: 0,
-                endValue: -60,
-                property: "translateY",
-                unit: "vh"
+                startValue: 1,
+                endValue: 0,
+                property: "opacity",
+                unit: ""
             }
         ]
     }
-];
+]
+
 
 const textData2 = [
     {
         start: "self",
-        startOffset: "0",
-        end: "self",
-        endOffset: "50vh",
+        duration: "100vh",
+
         easing: "easeInQuad",
         properties: [
             {
-                startValue: 60,
+                startValue: 1,
                 endValue: 0,
-                property: "translateX",
-                unit: "vw"
+                property: "opacity",
+                unit: ""
             }
         ]
     }
@@ -41,16 +40,14 @@ const textData2 = [
 const textData3 = [
     {
         start: "self",
-        startOffset: "0",
-        end: "self",
-        endOffset: "70vh",
+        duration: "100vh",
         easing: "easeInQuad",
         properties: [
             {
-                startValue: -60,
+                startValue: 1,
                 endValue: 0,
-                property: "translateX",
-                unit: "vw"
+                property: "opacity",
+                unit: ""
             }
         ]
     }
@@ -61,45 +58,45 @@ export default class PLX extends React.Component {
     render() {
         return (
             <div>
-                <div style={{ marginTop: "0vh" }}>
-                    <h2>Scroll down</h2>
+                <div className="plx1" style={{ height: "40vh" }} >
                 </div>
-
-                <div style={{ height: "20vh" }} />
 
                 <Plx
                     parallaxData={textData}
                     style={{
-                        height: "20vw",
+                        height: "40vw",
                         width: "60vw",
                         margin: "auto",
-                        border: "2px solid white"
+                        border: "2px solid white",
+                        backgroundColor: "blue"
                     }}
                 >
                     {/* Place your content here */}
                 </Plx>
 
-                <div style={{ height: "5vh" }} />
+                <div className="plx2" style={{ height: "10vh" }} />
 
                 <Plx
                     parallaxData={textData2}
                     style={{
-                        height: "20vw",
+                        height: "40vw",
                         width: "60vw",
                         margin: "auto",
-                        border: "2px solid red"
+                        border: "2px solid red",
+                        backgroundColor: "red"
                     }}
                 >
                     {/* Place your content here */}
                 </Plx>
-                <div style={{ height: "15vh" }} />
+                <div className="plx3" style={{ height: "10vh" }} />
                 <Plx
                     parallaxData={textData3}
                     style={{
-                        height: "20vw",
+                        height: "40vw",
                         width: "60vw",
                         margin: "auto",
-                        border: "2px solid blue"
+                        border: "2px solid blue",
+                        backgroundColor: "green"
                     }}
                 >
                     {/* Place your content here */}

@@ -2,7 +2,7 @@ const db = require("../models");
 
 // Defining methods for the calendarController
 module.exports = {
-    viewDates: async function (req, res) {
+    setDates: async function (req, res) {
         try {
             await db.Calendar.bulkCreate([
                 req.body.date,
@@ -49,6 +49,7 @@ module.exports = {
                     company: null
                 }
             })
+            // console.log(dates)
             res.json(dates)
         } catch (error) { console.log(error) }
     }

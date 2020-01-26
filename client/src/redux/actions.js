@@ -1,4 +1,9 @@
-import { LOGIN, LOGOUT } from "./actionTypes";
+import {
+    LOGIN,
+    LOGOUT,
+    GET_DATES,
+    GET_PROFILE
+} from "./actionTypes";
 
 /**
  * 
@@ -7,13 +12,18 @@ import { LOGIN, LOGOUT } from "./actionTypes";
  * @see {@link https://redux.js.org/basics/actions}
  */
 
- // Fill in the properties that need to be returned
- // in each action
-export const onLogin = (tokens) => ({
+// Fill in the properties that need to be returned
+// in each action
+export const onLogin = (tokens,profile) => ({
     type: LOGIN,
-    payload: {tokens}
+    payload: {
+        tokens,
+        profile
+    }
 });
 
 export const onLogout = () => ({
     type: LOGOUT
 });
+
+

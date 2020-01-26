@@ -6,7 +6,7 @@
  */
 
 import { Browser as JotBrowser } from 'jwt-jot'
-
+import axios from 'axios';
 import { LOGIN, LOGOUT } from "../actionTypes";
 
 export default function (state = initialState, action) {
@@ -16,7 +16,8 @@ export default function (state = initialState, action) {
             new JotBrowser('JWT_REFRESH', action.payload.tokens.refresh);
             return {
                 ...state,
-                details: setUserDetails()
+                details: setUserDetails(),
+                profile: setProfileDetails()
             };
         }
         case LOGOUT: {
@@ -39,11 +40,20 @@ export default function (state = initialState, action) {
     }
 }
 
+const setProfileDetails = () => {
+    const profile = axios.get("/profile/");
+    return profile.data;
+}
 const setUserDetails = () => {
     const accessJot = new JotBrowser('JWT_ACCESS');
+
+
+
     return accessJot.getToken() ?
+
         {
             firstName: accessJot.getClaim('firstName'),
+
             role: accessJot.getClaim('role'),
             id: accessJot.getClaim('sub')
         } :

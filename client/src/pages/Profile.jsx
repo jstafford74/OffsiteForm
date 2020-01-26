@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { useTable } from 'react-table'
 
 import API from "../api";
+import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import { } from "react-bootstrap";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+
 import {
   Card,
   Button,
@@ -28,11 +29,11 @@ class Profile extends Component {
     company: "",
     street_address: "",
     city: "",
-    state: "",
+    st: "",
     zip: "",
     work_phone: "",
     cell_phone: "",
-    ussername: ""
+    username: ""
   };
   componentDidMount() {
     this.loadProfile();
@@ -40,7 +41,7 @@ class Profile extends Component {
   loadProfile = () => {
     API.getProfile()
       .then(res => {
-        console.log(res);
+
         this.setState(
           res.data
         )
@@ -48,11 +49,7 @@ class Profile extends Component {
       )
       .catch(err => console.log(err));
   };
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -81,7 +78,7 @@ class Profile extends Component {
       company,
       street_address,
       city,
-      state,
+      st,
       zip,
       work_phone,
       cell_phone,
@@ -99,7 +96,7 @@ class Profile extends Component {
                     <Nav.Link href="#first">Profile</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="text-warning" href="#link">Schedule</Nav.Link>
+                    <Nav.Link className="text-warning" href="/Calendar/">Schedule</Nav.Link>
                   </Nav.Item>
 
                 </Nav>
@@ -130,8 +127,8 @@ class Profile extends Component {
                         <td>{cell_phone}</td>
                       </tr>
                       <tr>
-                        <td>{city}, {state} {zip}</td>
-                        <td></td> 
+                        <td>{city}, {st} {zip}</td>
+                        <td></td>
                         <td>Work</td>
                         <td>{work_phone}</td>
                       </tr>
@@ -173,4 +170,10 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+function mapStateToProps(state) {
+  
+  return { state }
+}
+
+export default connect(mapStateToProps)(Profile)
+

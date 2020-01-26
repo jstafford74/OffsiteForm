@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const calController = require("../../../controllers/calController");
 
-// Matches with "/api/protected/profile"
+// Matches with "/api/protected/calendar"
 router.route("/")
     .get(calController.getDates)
-    .put(calController.viewDates);
+    .put(calController.setDates);
 
 
 

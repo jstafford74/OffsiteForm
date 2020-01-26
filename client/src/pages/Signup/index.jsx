@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { Button, Col, Form, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -11,9 +11,17 @@ import { ServerError } from '../../components/Form';
 
 
 const schema = yup.object({
-    firstName: yup.string().required(),
+
+    first_Name: yup.string().required(),
     lastName: yup.string().required(),
     email: yup.string().required().email(),
+    street_address: yup.string().required(),
+    city: yup.string().required(),
+    state: yup.string().required().max(2),
+    zip: yup.string().required().max(5),
+    work_phone: yup.string().required(),
+    cell_phone: yup.string().required(),
+    company: yup.string(),
     username: yup.string().required().min(3),
     password: yup.string().required().min(8)
 });
@@ -26,6 +34,8 @@ const schema = yup.object({
  * https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fe-autocomplete-given-name
  */
 const Signup = (props) => {
+
+    const [enterprise, setEnterprise] = useState(false);
 
     return <Modal
         show={true}
@@ -54,6 +64,7 @@ const Signup = (props) => {
                     zip: '',
                     work_phone: '',
                     cell_phone: '',
+                    company: '',
                     username: '',
                     password: '',
                     check: false
@@ -256,16 +267,34 @@ const Signup = (props) => {
                                         checked={values.enterprise}
                                         onChange={(event) => {
                                             const value = event.target.checked ? 1 : 0
-                                            props.setState('enterprise', value);
+                                            setEnterprise(value);
 
                                         }}
-
-
                                         id="inline-checkbox-1" />
                                 </Form.Group>
-
-
                             </Form.Row>
+                            {
+                                enterprise ?
+                                    <Form.Row>
+                                        <Form.Group as={Col} md="4" controlId="company">
+                                            <Form.Label>Company</Form.Label>
+                                            <Form.Control
+                                                required
+                                                autoComplete='company'
+                                                name='company'
+                                                type="company"
+                                                placeholder="Company"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.company}
+                                                isInvalid={!!errors.company}
+                                            />
+                                            <Form.Control.Feedback type="invalid">
+                                                {errors.cell_phone && touched.cell_phone && errors.cell_phone}
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                    </ Form.Row> : null
+                            }
                             <Form.Row>
                                 <Form.Group as={Col} controlId="username">
                                     <Form.Label>Username</Form.Label>

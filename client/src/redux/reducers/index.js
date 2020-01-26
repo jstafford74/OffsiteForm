@@ -17,6 +17,7 @@ import user, { initialState as userState } from "./user";
  */
 export const rootState = {
     user: userState
+    
 };
 
 /**

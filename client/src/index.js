@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from "react-dom";
 import { Provider } from "react-redux";
-
+import Footer from './components/Footer'
 import store from "./redux/store";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -17,18 +17,36 @@ import * as serviceWorker from './serviceWorker';
  * 
  * @see {@link https://react-redux.js.org/api/provider}
  */
-const renderApp = () => render(
+const withFooter = WrappedComponent => () => [
+    <WrappedComponent key="1" />,
+    <Footer key="2" />
+  ];
+  
+  const Wrapper = () => (
     <Provider store={store}>
-        <App />
-    </Provider>,
+      <App />
+    </Provider>
+  );
+  
+  const WrapperWithFooter = withFooter(Wrapper);
+  
+  const renderApp = () => render(
+    <WrapperWithFooter />, 
     document.getElementById("root")
-);
+  );
+
+// const renderApp = () => render(
+//     <Provider store={store}>
+//         <App />
+//     </Provider>,
+//     document.getElementById("root")
+// );
 
 /**
  * Setting up hot module reloading for our components
  */
 if (process.env.NODE_ENV !== 'production' && module.hot) {
-    module.hot.accept('./App', renderApp)
+    module.hot.accept('./App',renderApp )
 }
 renderApp()
 

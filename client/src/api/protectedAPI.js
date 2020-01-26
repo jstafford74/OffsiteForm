@@ -7,7 +7,8 @@ import { onLogout } from '../redux/actions';
 export default {
     // Gets all books
     getDates: function () {
-        return axiosP.get("/calendar");
+        return axiosP.get("/calendar/");
+        // console.log(dates)
     },
     // Gets the book with the given id
     getProfile: function () {
