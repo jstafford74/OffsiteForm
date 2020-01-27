@@ -19,7 +19,20 @@ import {
   Jumbotron
 } from "react-bootstrap";
 
-
+const Style = {
+  jumbo: {
+    minHeight: '60vh',
+    backgroundColor: 'white',
+    border: 'black solid',
+    marginTop: '15px',
+    marginLeft: '80px',
+    maxWidth: '770px',
+    justifyContent: 'center'
+  },
+  card: {
+    maxWidth: '700px'
+  }
+}
 class Profile extends Component {
   state = {
     first_Name: "",
@@ -145,13 +158,18 @@ class Profile extends Component {
 
           </Col>
         </Row>
-        <Row className="justify-content-center ">
-          <Col md={6}>
-            {
-              calendarOpen && <Example />
-            }
-          </Col>
-        </Row>
+        <Jumbotron style={Style.jumbo}>
+          <Row >
+            <h4 style={{ color: 'black' }}>Mobile Scheduler</h4>
+          </Row>
+
+
+          {
+            calendarOpen && <Example />
+          }
+
+
+        </Jumbotron>
 
       </Container >
     );
