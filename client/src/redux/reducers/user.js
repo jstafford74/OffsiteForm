@@ -6,8 +6,7 @@
  */
 
 import { Browser as JotBrowser } from 'jwt-jot'
-import axios from 'axios';
-import { LOGIN, LOGOUT , GET_PROFILE} from "../actionTypes";
+import { LOGIN, LOGOUT , GET_PROFILE, GET_DATES} from "../actionTypes";
 
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -38,6 +37,12 @@ export default function (state = initialState, action) {
                 profile: action.payload.userData
             };
         }
+        case GET_DATES: {
+            return {
+                ...state,
+                dates: action.payload.exclDates
+            };
+        }
 
         default:
             return {
@@ -47,10 +52,7 @@ export default function (state = initialState, action) {
     }
 }
 
-const setProfileDetails = () => {
-    const profile = axios.get("/profile/");
-    return profile.data;
-}
+
 const setUserDetails = () => {
     const accessJot = new JotBrowser('JWT_ACCESS');
     return accessJot.getToken() ?

@@ -1,0 +1,21 @@
+label {
+    font-size: 1.2rem;
+    color: black;
+}
+
+input {
+    border: solid purple;
+}
+
+.form-control {
+    border: 1px solid black;
+    max-width: 100%;
+}
+
+.form-control::placeholder {
+    color: green;
+}
+
+.col-md-6{
+    max-width:70%
+}

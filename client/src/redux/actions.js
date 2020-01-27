@@ -33,3 +33,10 @@ export const onLoginData = (userData) => ({
         userData
     }
 });
+
+export const onLoginDates = (exclDates) => ({
+    type: GET_DATES,
+    payload: {
+        exclDates
+    }
+});

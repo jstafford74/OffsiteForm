@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import API from '../api'
-import axios from "axios";
+
 import { connect } from 'react-redux';
 import Example from '../components/cal'
-import { Link } from "react-router-dom";
+
 
 import {
     Card,
-    Button,
+
     Col,
     Row,
     Container,
     Nav,
     Table,
-    Jumbotron
+
 } from "react-bootstrap";
 
 
@@ -31,7 +31,7 @@ class Calendar extends React.Component {
         company: "",
         street_address: "",
         city: "",
-        st: "",
+        state: "",
         zip: "",
         work_phone: "",
         cell_phone: "",
@@ -81,7 +81,7 @@ class Calendar extends React.Component {
                 location: this.state.location,
                 address: this.state.address,
                 city: this.state.city,
-                state: this.state.st,
+                state: this.state.state,
                 zip: this.state.zip,
                 start_time: this.state.start_time,
                 end_time: this.state.end_time,
@@ -102,11 +102,10 @@ class Calendar extends React.Component {
             company,
             street_address,
             city,
-            st,
+            state,
             zip,
             work_phone,
             cell_phone,
-            username
         } = this.state;
         return (
             <Container className="mt-4">
@@ -152,7 +151,7 @@ class Calendar extends React.Component {
                                                 <td>{cell_phone}</td>
                                             </tr>
                                             <tr>
-                                                <td>{city}, {st} {zip}</td>
+                                                <td>{city}, {state} {zip}</td>
                                                 <td></td>
                                                 <td>Work</td>
                                                 <td>{work_phone}</td>

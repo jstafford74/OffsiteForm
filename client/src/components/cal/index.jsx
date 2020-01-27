@@ -1,43 +1,59 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { Form, Col, Row } from 'react-bootstrap';
-import './style.css'
+import API from '../../api'
+import './calstyle.css'
 
 
-// export default function Example() {
-//     const [disabledDays,setDisabledDays] = useState ()
-
-
-//     return <DayPicker
-//         month={new Date(2018, 8)}
-//         fromMonth={new Date(2018, 8)}
-//         toMonth={new Date(2018, 11)}
-//         fixedWeeks
-//     />
-// }
-
-
-export default class Example extends React.Component {
+export default class DayInput extends React.Component {
     constructor(props) {
         super(props);
         this.handleDayClick = this.handleDayClick.bind(this);
         this.state = {
-
             selectedDay: null,
+            dates: []
         };
     }
 
-    handleDayClick(day, { selected }) {
+    componentDidMount() {
+        this.loadCalendar();
+    }
+
+    loadCalendar = () => {
+        API.getDates()
+            .then(res =>
+                console.log(res.data)
+                // this.setState(
+                //     {
+                //         dates: res.data
+                //     }
+                // )
+            )
+            .catch(err => console.log(err));
+    };
+
+    handleDayClick(day, modifiers = {}) {
+        if (modifiers.disabled) {
+            return;
+        }
         this.setState({
-            selectedDay: selected ? undefined : day,
+            selectedDay: modifiers.selected ? undefined : day,
         });
     }
 
     render() {
+        const disabledDays = {
+            daysOfWeek: [0, 6],
+            after: new Date(2020, 3, 20),
+            before: new Date(2020, 3, 25),
+        };
+
+
+
         return (
 
-            <Row>
+            <Row className="justify-content-center" >
                 <Col md={6}>
                     <DayPicker
                         month={new Date(2020, 1)}
@@ -46,6 +62,7 @@ export default class Example extends React.Component {
                         fixedWeeks
                         selectedDays={this.state.selectedDay}
                         onDayClick={this.handleDayClick}
+                        disabledDays={disabledDays}
                     />
                     <p>
                         {this.state.selectedDay
@@ -59,7 +76,9 @@ export default class Example extends React.Component {
                         <Form.Label>Date</Form.Label>
                         <Form.Group as={Col} md="6" controlId="date">
                             <Form.Control
-                                placeholder="02/01/2020" />
+                                placeholder="02/01/2020"
+                                value={this.state.selectedDay}
+                            />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Label>Location</Form.Label>
@@ -68,17 +87,25 @@ export default class Example extends React.Component {
                                 placeholder="Stamford, CT" />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Label>Start Time</Form.Label>
                         <Form.Group as={Col} md="6" controlId="startTime">
-                            <Form.Control
-                                placeholder="8:00AM" />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Label>Start Time</Form.Label>
+                            <Form.Control as="select">
+                                <option>8:00</option>
+                                <option>9:00</option>
+                                <option>10:00</option>
+                                <option>11:00</option>
+                                <option>12:00</option>
+                            </Form.Control>
                         </Form.Group>
-                        <Form.Label>End Time</Form.Label>
                         <Form.Group as={Col} md="6" controlId="endTime">
-                            <Form.Control
-                                placeholder="4:00PM" />
-                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                            <Form.Label>End Time</Form.Label>
+                            <Form.Control as="select">
+                                <option>2:00</option>
+                                <option>3:00</option>
+                                <option>4:00</option>
+                                <option>5:00</option>
+                                <option>6:00</option>
+                            </Form.Control>
                         </Form.Group>
                     </Form>
                 </Col>

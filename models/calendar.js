@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
       comment: "null"
     },
     'company': {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(255),
       allowNull: true,
       comment: "null"
     },
