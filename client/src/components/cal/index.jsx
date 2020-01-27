@@ -10,6 +10,7 @@ export default class DayInput extends React.Component {
     constructor(props) {
         super(props);
         this.handleDayClick = this.handleDayClick.bind(this);
+        this.handleChange = this.handleDayClick.bind(this);
         this.state = {
             selectedDay: null,
             dates: []
@@ -40,6 +41,11 @@ export default class DayInput extends React.Component {
         this.setState({
             selectedDay: modifiers.selected ? undefined : day,
         });
+    }
+
+    handleChange(e) {
+        e.preventDefault();
+        console.log(e.target.value)
     }
 
     render() {
@@ -78,18 +84,23 @@ export default class DayInput extends React.Component {
                             <Form.Control
                                 placeholder="02/01/2020"
                                 value={this.state.selectedDay}
+                                onChange={this.state.handleChange}
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Label>Location</Form.Label>
                         <Form.Group as={Col} md="6" controlId="location">
                             <Form.Control
-                                placeholder="Stamford, CT" />
+                                placeholder="Stamford, CT"
+                                onChange={this.state.handleChange}
+                            />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="startTime">
                             <Form.Label>Start Time</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control as="select"
+                                onChange={this.state.handleChange}
+                            >
                                 <option>8:00</option>
                                 <option>9:00</option>
                                 <option>10:00</option>
@@ -99,7 +110,9 @@ export default class DayInput extends React.Component {
                         </Form.Group>
                         <Form.Group as={Col} md="6" controlId="endTime">
                             <Form.Label>End Time</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control as="select"
+                                onChange={this.state.handleChange}
+                            >
                                 <option>2:00</option>
                                 <option>3:00</option>
                                 <option>4:00</option>
