@@ -1,4 +1,5 @@
 const db = require("../models");
+const Op = db.Sequelize.Op;
 
 // Defining methods for the calendarController
 module.exports = {
@@ -47,7 +48,7 @@ module.exports = {
                 attributes: ['date'],
                 where: {
                     company: {
-                        $ne: null
+                        [Op.ne]: null
                     }
                 }
             })

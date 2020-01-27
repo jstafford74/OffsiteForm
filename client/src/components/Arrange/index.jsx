@@ -2,8 +2,8 @@
 import React from 'react';
 import Plx from "react-plx";
 
-const BOXES_PER_ROW = 4;
-const ROWS = 6;
+const BOXES_PER_ROW = 6;
+const ROWS = 4;
 const BOXES = [];
 
 const COLORS = [
@@ -30,7 +30,8 @@ const Style = {
         height: '24rem',
         margin: '0 auto 10rem',
         position: 'relative',
-        width: '24rem'
+        width: '48rem',
+        // backgroundImage: "url('https://i.imgur.com/mvJgCUZ.png')"
     },
     box: {
         background: '#ddd',
@@ -87,7 +88,7 @@ for (let i = 0; i < ROWS; i++) {
                             unit: '%',
                         },
                         {
-                            startValue:0,
+                            startValue: 0,
                             endValue: (start + Math.random() * offset) * yFactor,
                             property: 'translateY',
                             unit: '%',

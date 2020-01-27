@@ -5,7 +5,7 @@ const textData = [
         properties: [
             {
                 startValue: 0,
-                endValue: -50,
+                endValue: -100,
                 unit: 'vh',
                 property: 'translateY',
             },
