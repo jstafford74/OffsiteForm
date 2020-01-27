@@ -8,7 +8,7 @@ export default function Splash(props) {
     return (
         <>
             <Container className='text-center'>
-                <Row >
+                <Row className="mt-4">
                     <Col >
                         <Jumbotron  >
                             <h1 >Melanoscan:</h1>

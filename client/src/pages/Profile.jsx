@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-
+import { onLoginData } from '../redux/actions'
 import API from "../api";
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import { } from "react-bootstrap";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import Example from '../components/cal'
 
 import {
   Card,
@@ -33,7 +34,8 @@ class Profile extends Component {
     zip: "",
     work_phone: "",
     cell_phone: "",
-    username: ""
+    username: "",
+    calendarOpen: false
   };
   componentDidMount() {
     this.loadProfile();
@@ -41,7 +43,7 @@ class Profile extends Component {
   loadProfile = () => {
     API.getProfile()
       .then(res => {
-
+        this.props.onLoginData(res.data)
         this.setState(
           res.data
         )
@@ -82,7 +84,8 @@ class Profile extends Component {
       zip,
       work_phone,
       cell_phone,
-      username
+      username,
+      calendarOpen,
     } = this.state;
 
     return (
@@ -96,7 +99,7 @@ class Profile extends Component {
                     <Nav.Link href="#first">Profile</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link className="text-warning" href="/Calendar/">Schedule</Nav.Link>
+                    <Button className="text-warning" onClick={() => this.setState({ calendarOpen: true })}>Schedule </Button>
                   </Nav.Item>
 
                 </Nav>
@@ -134,27 +137,7 @@ class Profile extends Component {
                       </tr>
                     </tbody>
                   </Table>
-                  <Col md={4}>
 
-                  </Col>
-                  <Col md={4}>
-
-                  </Col>
-                  <Col md={4}>
-
-                  </Col>
-
-                  <Row>
-                    <Col md={4}>
-
-                    </Col>
-                    <Col md={4}>
-
-                    </Col>
-                    <Col md={4}>
-
-                    </Col>
-                  </Row>
                 </Card.Text>
 
               </Card.Body>
@@ -162,18 +145,24 @@ class Profile extends Component {
 
           </Col>
         </Row>
-        <Row>
-
+        <Row className="justify-content-center ">
+          <Col md={6}>
+            {
+              calendarOpen && <Example />
+            }
+          </Col>
         </Row>
+
       </Container >
     );
   }
 }
 
 function mapStateToProps(state) {
-  
-  return { state }
+  return { profile: state.user.profile }
 }
 
-export default connect(mapStateToProps)(Profile)
+export default connect(
+  mapStateToProps,
+  { onLoginData })(Profile)
 

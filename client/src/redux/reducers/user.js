@@ -7,7 +7,7 @@
 
 import { Browser as JotBrowser } from 'jwt-jot'
 import axios from 'axios';
-import { LOGIN, LOGOUT } from "../actionTypes";
+import { LOGIN, LOGOUT , GET_PROFILE} from "../actionTypes";
 
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 details: setUserDetails(),
-                profile: setProfileDetails()
+
             };
         }
         case LOGOUT: {
@@ -32,6 +32,13 @@ export default function (state = initialState, action) {
                 details: setUserDetails()
             };
         }
+        case GET_PROFILE: {
+            return {
+                ...state,
+                profile: action.payload.userData
+            };
+        }
+
         default:
             return {
                 ...state,
@@ -46,19 +53,33 @@ const setProfileDetails = () => {
 }
 const setUserDetails = () => {
     const accessJot = new JotBrowser('JWT_ACCESS');
-
-
-
     return accessJot.getToken() ?
-
         {
             firstName: accessJot.getClaim('firstName'),
-
             role: accessJot.getClaim('role'),
             id: accessJot.getClaim('sub')
         } :
         null;
 }
+
 export const initialState = {
     details: setUserDetails()
 };
+
+// const setUserDetails = async () => {
+//     const accessJot = new JotBrowser('JWT_ACCESS');
+
+//     if (accessJot.getToken()) {
+//         const profile = await axios.get("/profile/");
+
+//         return {
+//             firstName: accessJot.getClaim('firstName'),
+//             role: accessJot.getClaim('role'),
+//             id: accessJot.getClaim('sub'),
+//             ...profile.data
+//         }
+//     } else {
+//         return null
+//     }
+
+// }

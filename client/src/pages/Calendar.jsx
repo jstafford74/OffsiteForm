@@ -40,25 +40,12 @@ class Calendar extends React.Component {
 
     componentDidMount() {
         this.loadCalendar();
-        this.loadProfile();
+       
     }
-
-    loadProfile = () => {
-        API.getProfile()
-            .then(res => {
-
-                this.setState(
-                    res.data
-                )
-            }
-            )
-            .catch(err => console.log(err));
-    };
 
     loadCalendar = () => {
         API.getDates()
             .then(res =>
-
                 this.setState(
                     {
                         dates: res.data
@@ -210,7 +197,7 @@ class Calendar extends React.Component {
 export default connect(
 
     // mapStateToProps
-    state => ({ profile: state }),
+    state => ({ profile: state.user.profile }),
     // mapDispatchToProps
 
 )(Calendar);
