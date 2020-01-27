@@ -2,7 +2,7 @@
 import React from 'react';
 import Plx from "react-plx";
 
-const BOXES_PER_ROW = 6;
+const BOXES_PER_ROW = 7;
 const ROWS = 4;
 const BOXES = [];
 
@@ -30,16 +30,16 @@ const Style = {
         height: '24rem',
         margin: '0 auto 10rem',
         position: 'relative',
-        width: '48rem',
+        width: '54rem',
         // backgroundImage: "url('https://i.imgur.com/mvJgCUZ.png')"
     },
     box: {
         background: '#ddd',
         borderRadius: '0.3rem',
         float: 'left',
-        height: '5.4rem',
-        margin: '0.3rem',
-        width: '5.4rem'
+        height: '6rem',
+        margin: '0.4rem',
+        width: '6rem'
     }
 }
 
@@ -62,7 +62,7 @@ for (let i = 0; i < ROWS; i++) {
             data: [
                 {
                     start: 'self',
-                    startOffset: '40vh',
+                    startOffset: '30vh',
                     duration: 400,
                     name: 'first',
                     properties: [
