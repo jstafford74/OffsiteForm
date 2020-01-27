@@ -40,17 +40,19 @@ class Calendar extends React.Component {
 
     componentDidMount() {
         this.loadCalendar();
-       
+
     }
 
     loadCalendar = () => {
         API.getDates()
             .then(res =>
+                // console.log(res.data)                
                 this.setState(
                     {
                         dates: res.data
                     }
                 )
+
             )
             .catch(err => console.log(err));
     };
@@ -156,14 +158,17 @@ class Calendar extends React.Component {
                                                 <td>{work_phone}</td>
                                             </tr>
                                         </tbody>
-                                    </Table>                                    <Col md={4}>
-
-                                    </Col>
+                                    </Table>
                                     <Col md={4}>
 
                                     </Col>
                                     <Col md={4}>
 
+                                    </Col>
+                                    <Col md={4}>
+                                        {
+                                            !dates.length ? null : dates[0].date
+                                        }
                                     </Col>
 
                                     <Row>
