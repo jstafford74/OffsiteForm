@@ -6,7 +6,7 @@ module.exports = {
     setDates: async function (req, res) {
         try {
             await db.Calendar.bulkCreate([
-                req.body.date,
+                req.body.date_n,
                 req.body.company,
                 req.body.first_name,
                 req.body.last_Name,
@@ -23,7 +23,7 @@ module.exports = {
             ],
                 {
                     fields: [
-                        'date',
+                        'date_n',
                         'company',
                         'first_Name',
                         'last_Name',
@@ -44,8 +44,8 @@ module.exports = {
     },
     getDates: async function (req, res) {
         try {
-            const dates = await db.Calendar.findAll({
-                attributes: ['date'],
+            const exclDates = await db.Calendar.findAll({
+                attributes: ['date_n'],
                 where: {
                     company: {
                         [Op.ne]: null
@@ -53,7 +53,7 @@ module.exports = {
                 }
             })
             // console.log(dates)
-            res.json(dates)
+            res.json(exclDates)
         } catch (error) { console.log(error) }
     }
 };

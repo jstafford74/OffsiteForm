@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { onLoginData, onLoginDates } from '../redux/actions'
-import API from "../api";
+import { onLoginData, onLogin } from '../redux/actions'
+import API from "../api/protectedAPI";
 import { connect } from 'react-redux'
 import DayInput from '../components/cal';
 import 'react-day-picker/lib/style.css';
@@ -32,54 +32,34 @@ const Style = {
 }
 class Profile extends Component {
   state = {
-    first_Name: "",
-    last_Name: "",
-    email: "",
-    personal: "",
-    enterprise: "",
-    company: "",
-    street_address: "",
-    city: "",
-    st: "",
-    zip: "",
-    work_phone: "",
-    cell_phone: "",
+    first_Name: '',
+    last_Name: '',
+    email: '',
+    company: '',
+    street_address: '',
+    city: '',
+    state: '',
+    zip: '',
+    work_phone: '',
+    cell_phone: '',
     calendarOpen: false
   };
+
   componentDidMount() {
-    this.loadProfile();
+    // this.loadProfile();
 
   }
 
   loadProfile = () => {
     API.getProfile()
-      .then(res => {
-        this.props.onLoginData(res.data)
-        this.setState(res.data)
-      }
+      .then(res =>
+        console.log(res.data)
+        // this.props.onLoginData(res.data)
+        // this.setState(res.data)
+        // }
       )
       .catch(err => console.log(err));
-  };
-
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
-    }
-  };
-
+  }
 
   render() {
     const {
@@ -89,12 +69,17 @@ class Profile extends Component {
       company,
       street_address,
       city,
-      st,
+      state,
       zip,
       work_phone,
       cell_phone,
       calendarOpen,
     } = this.state;
+
+    // const { profile } = this.props;
+    // if (!profile) {
+    //   return
+    // };
 
     return (
       <Container className="mt-4">
@@ -104,18 +89,18 @@ class Profile extends Component {
               <Card.Header>
                 <Row className="justify-content-between">
                   <Nav variant="tabs" defaultActiveKey="#first">
-                    <Nav.Item style={{marginLeft: '1rem'}}>
+                    <Nav.Item style={{ marginLeft: '1rem' }}>
                       <Nav.Link href="#first">Profile</Nav.Link>
                     </Nav.Item>
                   </Nav>
-                  <Button style={{marginRight: '1rem'}} className="text-warning" onClick={() => this.setState({ calendarOpen: true })}>Schedule </Button>
+                  <Button style={{ marginRight: '1rem' }} className="text-warning" onClick={() => this.setState({ calendarOpen: true })}>Schedule </Button>
                 </Row>
               </Card.Header>
               <Card.Body className="justify-content-center">
                 <Card.Title >
                   <Row >
-                    <Col className="text-info" md={6}>{first_Name} {last_Name}</Col>
-                    <Col className="text-info" md={6}>{company}</Col>
+                    <Col className="text-info" md={6}></Col>
+                    <Col className="text-info" md={6}></Col>
                   </Row>
                 </Card.Title>
 
@@ -130,16 +115,16 @@ class Profile extends Component {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>{street_address}</td>
-                      <td className="colspan-2">{email}</td>
+                      <td></td>
+                      <td className="colspan-2"></td>
                       <td>Cell</td>
-                      <td>{cell_phone}</td>
+                      <td></td>
                     </tr>
                     <tr>
-                      <td>{city}, {st} {zip}</td>
+                      <td></td>
                       <td></td>
                       <td>Work</td>
-                      <td>{work_phone}</td>
+                      <td></td>
                     </tr>
                   </tbody>
                 </Table>
@@ -172,11 +157,11 @@ class Profile extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { profile: state.user.profile }
-}
+// function mapStateToProps(state) {
+//   return { profile: state.profile }
+// }
 
 export default connect(
-  mapStateToProps,
-  { onLoginData })(Profile)
+  null,
+  { onLogin, onLoginData })(Profile)
 

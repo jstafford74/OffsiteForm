@@ -62,12 +62,12 @@ for (let i = 0; i < ROWS; i++) {
             data: [
                 {
                     start: 'self',
-                    startOffset: '30vh',
+                    startOffset: '25vh',
                     duration: 400,
                     name: 'first',
                     properties: [
                         {
-                            startValue: 1,
+                            startValue: .8,
                             endValue: 0,
                             property: 'opacity',
                         },

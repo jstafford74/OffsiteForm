@@ -1,7 +1,7 @@
 class Calendar {
     constructor(
         date) {
-        this.date = date;
+        this.date_n = date_n;
         this.company = null;
         this.first_Name = null;
         this.last_Name = null;
@@ -18,8 +18,8 @@ class Calendar {
     }
 
     
-    makeCalendar(date) {
-        this.date = date;
+    makeCalendar(date_n) {
+        this.date_n = date_n;
         this.company = null;
         this.first_Name = null;
         this.last_Name = null;

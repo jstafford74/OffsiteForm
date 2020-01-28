@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import { onLogin } from '../../redux/actions'
+import { onLoginData } from '../../redux/actions'
 import API from '../../api'
 import { ServerError } from '../../components/Form';
 
@@ -13,7 +13,7 @@ import { ServerError } from '../../components/Form';
 const schema = yup.object({
 
     first_Name: yup.string().required(),
-    lastName: yup.string().required(),
+    last_Name: yup.string().required(),
     email: yup.string().required().email(),
     street_address: yup.string().required(),
     city: yup.string().required(),
@@ -50,7 +50,7 @@ const Signup = (props) => {
                 Melanoscan Signup
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{backgroundColor:'white'}}>
             <h5 className="card-title">Signup to Create Profile</h5>
             <Formik
                 initialValues={{
@@ -74,6 +74,7 @@ const Signup = (props) => {
                     try {
                         const data = await API.signup(values);
                         if (data.success) {
+                            console.log('success');
                             props.onLogin(data.tokens);
                         } else {
                             formikBag.setErrors(data.errors);
@@ -103,8 +104,7 @@ const Signup = (props) => {
                                     <Form.Label>First name</Form.Label>
                                     <Form.Control
                                         required
-                                        autoComplete='given-name'
-                                        name='firstName'
+                                        name='first_Name'
                                         type='text'
                                         placeholder="First name"
                                         onChange={handleChange}
@@ -120,8 +120,7 @@ const Signup = (props) => {
                                     <Form.Label>Last name</Form.Label>
                                     <Form.Control
                                         required
-                                        autoComplete='family-name'
-                                        name='lastName'
+                                        name='last_Name'
                                         type='text'
                                         placeholder="Last name"
                                         onChange={handleChange}
@@ -140,10 +139,9 @@ const Signup = (props) => {
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control
                                         required
-                                        autoComplete='email'
                                         name='email'
                                         type='email'
-                                        placeholder='Email address'
+                                        placeholder='codemonkey@netscape.com'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
@@ -157,8 +155,7 @@ const Signup = (props) => {
                                     <Form.Label>Street Address</Form.Label>
                                     <Form.Control
                                         required
-                                        autoComplete='address'
-                                        name='address'
+                                        name='street_address'
                                         type='text'
                                         placeholder='Street address'
                                         onChange={handleChange}
@@ -177,7 +174,7 @@ const Signup = (props) => {
                                     <Form.Control
                                         required
                                         autoComplete='phone'
-                                        name='phone'
+                                        name='work_phone'
                                         type='phone'
                                         placeholder='Work Phone'
                                         onChange={handleChange}
@@ -248,7 +245,7 @@ const Signup = (props) => {
                                     <Form.Control
                                         required
                                         autoComplete='phone'
-                                        name='phone'
+                                        name='cell_phone'
                                         type="phone"
                                         placeholder="Cell Phone"
                                         onChange={handleChange}
@@ -292,7 +289,7 @@ const Signup = (props) => {
                                     </Form.Group> : null
                                 }
                             </Form.Row>
-                          
+
                             <Form.Row>
                                 <Form.Group as={Col} controlId="username">
                                     <Form.Label>Username</Form.Label>
@@ -329,7 +326,11 @@ const Signup = (props) => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
-                            <Button type="submit" className="btn btn-primary" disabled={isSubmitting}>Submit</Button>
+                            <Button type="submit"
+                                className="btn btn-primary"
+                                disabled={isSubmitting}
+                            >Submit
+                            </Button>
                         </Form>
                     )}
             </Formik>
@@ -339,11 +340,11 @@ const Signup = (props) => {
 
 };
 
-export default Signup;
 
-// export default connect(
-//     // mapStateToProps
-//     null,
-//     // mapDispatchToProps
 
-// )(Signup);
+export default connect(
+    // mapStateToProps
+    null,
+    // mapDispatchToProps
+    { onLoginData }
+)(Signup);

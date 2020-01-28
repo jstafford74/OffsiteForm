@@ -1,5 +1,5 @@
 const faker = require("faker");
-
+const bcrypt = require('bcryptjs');
 class Profile {
     constructor(
         first_Name,
@@ -51,6 +51,7 @@ class Profile {
         `;
     }
 
+    
     makeProfileData() {
 
         this.first_Name = faker.name.firstName();
@@ -67,6 +68,7 @@ class Profile {
         this.cell_phone = faker.phone.phoneNumber("(203)-###-####");
         this.username = `${this.first_Name}.${this.last_Name}`;
         this.password = 12345678;
+        this.passwordHash = bcrypt.hashSync(`${this.password}`,10);
     };
 }
 

@@ -13,7 +13,7 @@ export default class DayInput extends React.Component {
         this.handleChange = this.handleDayClick.bind(this);
         this.state = {
             selectedDay: null,
-            dates: []
+            exclDates: []
         };
     }
 
@@ -24,12 +24,12 @@ export default class DayInput extends React.Component {
     loadCalendar = () => {
         API.getDates()
             .then(res =>
-                console.log(res.data)
-                // this.setState(
-                //     {
-                //         dates: res.data
-                //     }
-                // )
+                // console.log(res.data)
+                this.setState(
+                    {
+                        exclDates: res.data
+                    }
+                )
             )
             .catch(err => console.log(err));
     };
@@ -68,7 +68,7 @@ export default class DayInput extends React.Component {
                         fixedWeeks
                         selectedDays={this.state.selectedDay}
                         onDayClick={this.handleDayClick}
-                        disabledDays={disabledDays}
+                        disabledDays={this.state.exclDates}
                     />
                     <p>
                         {this.state.selectedDay

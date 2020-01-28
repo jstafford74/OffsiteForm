@@ -10,7 +10,7 @@ async function profiles() {
   }
   
   try {
-    await db.sequelize.sync({ force: true });
+    await db.sequelize.sync({ force: false });
     const profiler =  db.Profile.bulkCreate(proArr);
     console.log("success", profiler.toJSON());
   } catch (err) {

@@ -2,8 +2,8 @@
 
 module.exports = function (sequelize, DataTypes) {
   var Calendar = sequelize.define('Calendar', {
-    
-    'date': {
+
+    'date_n': {
       type: DataTypes.DATEONLY,
       allowNull: true,
       comment: "null"
@@ -76,6 +76,12 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     tableName: 'calendar'
   });
+
+
+  // Each Calendar can have many profiles and many registrations in the offsite calendar.
+  // When a calendar event is deleted, the profile cannot, but the offsite schedule should be 
+
+  
   return Calendar;
 };
 

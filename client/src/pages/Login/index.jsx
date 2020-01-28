@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import { onLogin } from '../../redux/actions'
+import { onLogin, onLoginData } from '../../redux/actions'
 import API from '../../api'
 import { ServerError } from '../../components/Form';
 
@@ -22,6 +22,7 @@ const Login = (props) => {
         onHide={() => props.history.push('/')}
         animation={false}
         size="md"
+
         aria-labelledby="login-form"
         centered
     >
@@ -30,7 +31,7 @@ const Login = (props) => {
                 Melanoscan Profile Login
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body style={{ backgroundColor: 'white' }}>
             <h5 className="card-title">Please enter username & password</h5>
             <Formik
                 initialValues={{ username: '', password: '' }}
@@ -38,7 +39,9 @@ const Login = (props) => {
                 onSubmit={async (values, formikBag) => {
                     try {
                         const data = await API.login(values);
-                        data.success ? props.onLogin(data.tokens) : formikBag.setErrors(data.errors);
+                        console.log(data.user);
+                        data.success ? props.onLogin(data.tokens) && props.onLoginData(data.user) : formikBag.setErrors(data.errors);
+
 
                     } catch (err) {
                         formikBag.setStatus(err);
@@ -83,7 +86,7 @@ const Login = (props) => {
                             </Form.Row >
                             <Form.Row className="justify-content-center">
                                 <Col sm={8}>
-                                    <Form.Group controlId="Password">
+                                    <Form.Group controlId="password">
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control
                                             autoComplete='current-password'
@@ -118,6 +121,6 @@ export default connect(
     // mapStateToProps
     null,
     // mapDispatchToProps
-    { onLogin }
+    { onLogin, onLoginData }
 )(Login);
 

@@ -36,4 +36,6 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.Tokens.hasOne(db.Profile,{foreignKey: 'id' });
+
 module.exports = db;

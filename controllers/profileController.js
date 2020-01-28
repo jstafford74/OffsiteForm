@@ -3,7 +3,7 @@ const db = require("../models");
 // Defining methods for the authController
 module.exports = {
     profile: async function (req, res) {
-        // console.log(req.user);
+        console.log(req.user);
         try {
             await db.Profile.findAll({
                 where: {

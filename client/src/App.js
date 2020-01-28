@@ -23,8 +23,8 @@ export default function App() {
           <ConnectedPublicRoute exact path="/" component={Splash} />
           <ConnectedPublicRoute path="/login" component={Login} />
           <ConnectedPublicRoute path="/signup" component={Signup} />
-          <ConnectedPrivateRoute exact path="/profile/" component={Profile} />
-          {/* <ConnectedPrivateRoute path="/Calendar/" component={Calendar} /> */}
+          <ConnectedPrivateRoute exact path="/profile" component={Profile} />
+          {/* <ConnectedPrivateRoute path="/calendar/" component={Calendar} /> */}
           <Route path="*"><NoMatch /></Route>
         </Switch>
 

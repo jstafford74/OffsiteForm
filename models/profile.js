@@ -72,10 +72,17 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: true,
 
-    }
+    }, 'passwordHash': {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+
+    },
+
   }, {
     tableName: 'profile'
   });
+  // Each Profile can have many days in the calendar & many days in the offsite schedule
+
   return Profile;
 };
 

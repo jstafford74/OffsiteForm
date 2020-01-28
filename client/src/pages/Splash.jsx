@@ -18,24 +18,23 @@ export default function Splash(props) {
                 </Row>
             </Container>
             <Container>
-
                 <PLX />
             </Container>
-
             <Container>
                 <Row className="text-center">
                     <Col >
                         <Button
                             type="submit"
-                            className="btn btn-success"
+                            size="lg"
                             onClick={() => props.history.push('/signup')}
-
+                            variant="outline-success"
                         >Signup</Button>
                     </Col>
                     <Col >
                         <Button
                             type="submit"
-                            className="btn btn-primary"
+                            size="lg"
+                            variant="outline-primary"
                             onClick={() => props.history.push('/login')}
                         >Login</Button>
                     </Col>

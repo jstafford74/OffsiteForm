@@ -2,12 +2,12 @@ import React from 'react';
 import Plx from "react-plx";
 import Arrange from '../Arrange';
 import { Col, Row } from 'react-bootstrap';
-import ';
+
 
 const textData = [
     {
         start: ".plx1",
-        duration: "200vh",
+        duration: "220vh",
         easing: "easeInQuad",
         properties: [
 
@@ -25,11 +25,11 @@ const textData = [
 const textData3 = [
     {
         start: "self",
-        duration: "100vh",
+        duration: "130vh",
         easing: "easeInQuad",
         properties: [
             {
-                startValue: .2,
+                startValue: .6,
                 endValue: 1,
                 property: "opacity",
                 unit: ""
@@ -66,9 +66,7 @@ export default class PLX extends React.Component {
                             </h5>
                         </Col>
                     </Row>
-                    <h5>
 
-                    </h5>
                 </div>
 
                 <Plx
@@ -82,7 +80,7 @@ export default class PLX extends React.Component {
                 >
                     <Row>
                         <Col>
-                            <h1 style={{ lineHeight: '1.8' }}>Utilizing 3TB of storage and over 20yrs of critical <code>[Key:Value]</code> image pairs, Our AI engine will <strong className="text-success">SHATTER</strong> & disrupt the landscape for not only early detection of skin diseases, but also adminitering primary care.</h1>
+                            <h1 style={{ lineHeight: '1.7' }}>Utilizing 3TB of storage and over 20yrs of critical <code>[Key:Value]</code> image pairs, Our AI engine will <strong className="text-success">SHATTER</strong> & <strong className="text-warning">DISRUPT</strong> the landscape for not only early detection of skin diseases, but also adminitering primary care.</h1>
                         </Col>
                     </Row>
                 </Plx>
@@ -99,10 +97,10 @@ export default class PLX extends React.Component {
 
                     }}
                 >
-                    <hr />
+                    <hr style={{ backgroundColor: 'red',fontWeight:200 }} />
                     <Row>
                         <Col>
-                            <h3 style={{ lineHeight: '1' }}>The Melanoscan mobile scanning booth operates within a secure HIPPA compliant network protocol that puts the patient's privacy and care first.  Within a few minutes, an onsite medical practice can be deployed to ensure employees and stakeholders receive optimal care without sacrificing time or travel away from work.</h3>
+                            <h4 md={10} style={{ lineHeight: '1.5' }}>The Melanoscan mobile scanning booth operates within a secure network that puts the patient's privacy and care first.  Within a few minutes, onsite scanning can be scheduled better ensure employee satisfaction & longevity. Register or login to view available dates.</h4>
                         </Col>
                     </Row>
                 </Plx>

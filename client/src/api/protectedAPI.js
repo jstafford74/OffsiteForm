@@ -5,18 +5,18 @@ import store from '../redux/store';
 import { onLogout } from '../redux/actions';
 
 export default {
-    // Gets all books
+    
     getDates: function () {
-        return axiosP.get("/calendar/");
-        // console.log(dates)
+        return axiosP.get("/calendar");
+       
     },
-    // Gets the book with the given id
+    
     getProfile: function () {
-        return axiosP.get("/profile/");
+        return axiosP.get("/profile");
     },
-    // Deletes the book with the given id
+    
     saveDate: function (id) {
-        return axiosP.delete("/books/" + id);
+        return axiosP.delete("/calendar" + id);
     }
 };
 
