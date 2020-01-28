@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import { onLogin } from '../../redux/actions'
+import { onLoginData } from '../../redux/actions'
 import API from '../../api'
 import { ServerError } from '../../components/Form';
 
@@ -13,7 +13,7 @@ import { ServerError } from '../../components/Form';
 const schema = yup.object({
 
     first_Name: yup.string().required(),
-    lastName: yup.string().required(),
+    last_Name: yup.string().required(),
     email: yup.string().required().email(),
     street_address: yup.string().required(),
     city: yup.string().required(),
@@ -50,7 +50,7 @@ const Signup = (props) => {
                 Melanoscan Signup
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{ backgroundColor: 'white' }}>
             <h5 className="card-title">Signup to Create Profile</h5>
             <Formik
                 initialValues={{
@@ -73,6 +73,7 @@ const Signup = (props) => {
                 onSubmit={async (values, formikBag) => {
                     try {
                         const data = await API.signup(values);
+                        console.log(data);
                         if (data.success) {
                             props.onLogin(data.tokens);
                         } else {
@@ -104,7 +105,7 @@ const Signup = (props) => {
                                     <Form.Control
                                         required
                                         autoComplete='given-name'
-                                        name='firstName'
+                                        name='first_Name'
                                         type='text'
                                         placeholder="First name"
                                         onChange={handleChange}
@@ -121,7 +122,7 @@ const Signup = (props) => {
                                     <Form.Control
                                         required
                                         autoComplete='family-name'
-                                        name='lastName'
+                                        name='last_Name'
                                         type='text'
                                         placeholder="Last name"
                                         onChange={handleChange}
@@ -158,7 +159,7 @@ const Signup = (props) => {
                                     <Form.Control
                                         required
                                         autoComplete='address'
-                                        name='address'
+                                        name='street_address'
                                         type='text'
                                         placeholder='Street address'
                                         onChange={handleChange}
@@ -177,8 +178,8 @@ const Signup = (props) => {
                                     <Form.Control
                                         required
                                         autoComplete='phone'
-                                        name='phone'
-                                        type='phone'
+                                        name='work_phone'
+                                        type='text'
                                         placeholder='Work Phone'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -230,7 +231,7 @@ const Signup = (props) => {
                                         required
                                         autoComplete='Zip'
                                         name='zip'
-                                        type='zip'
+                                        type='text'
                                         placeholder="Zip"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -248,8 +249,8 @@ const Signup = (props) => {
                                     <Form.Control
                                         required
                                         autoComplete='phone'
-                                        name='phone'
-                                        type="phone"
+                                        name='cell_phone'
+                                        type='text'
                                         placeholder="Cell Phone"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
@@ -260,7 +261,7 @@ const Signup = (props) => {
                                         {errors.cell_phone && touched.cell_phone && errors.cell_phone}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group as={Col} md="4" controlId="type" style={{ marginTop: "2.2rem" }}>
+                                <Form.Group as={Col} md="4" controlId="company" style={{ marginTop: "2.2rem" }}>
 
                                     <Form.Check
                                         inline label="Enterprise"
@@ -279,7 +280,7 @@ const Signup = (props) => {
                                             required
                                             autoComplete='company'
                                             name='company'
-                                            type="company"
+                                            type='text'
                                             placeholder="Company"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -292,7 +293,7 @@ const Signup = (props) => {
                                     </Form.Group> : null
                                 }
                             </Form.Row>
-                          
+
                             <Form.Row>
                                 <Form.Group as={Col} controlId="username">
                                     <Form.Label>Username</Form.Label>
@@ -301,6 +302,8 @@ const Signup = (props) => {
                                         name='username'
                                         autoComplete='username'
                                         placeholder="Username"
+
+                                        type="text"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.username}
@@ -312,13 +315,13 @@ const Signup = (props) => {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col} controlId="Password">
+                                <Form.Group as={Col} controlId="password">
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='new-password'
                                         name='password'
-                                        type="password"
+                                        type='text'
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.password}
@@ -329,7 +332,9 @@ const Signup = (props) => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
-                            <Button type="submit" className="btn btn-primary" disabled={isSubmitting}>Submit</Button>
+                            <Button type="submit"
+                                className="btn btn-primary"
+                                disabled={isSubmitting}>Submit</Button>
                         </Form>
                     )}
             </Formik>
@@ -339,11 +344,11 @@ const Signup = (props) => {
 
 };
 
-export default Signup;
+// export default Signup;
 
-// export default connect(
-//     // mapStateToProps
-//     null,
-//     // mapDispatchToProps
-
-// )(Signup);
+export default connect(
+    // mapStateToProps
+    null,
+    // mapDispatchToProps
+    { onLoginData }
+)(Signup);

@@ -3,10 +3,10 @@ const passport = require('passport');
 
 const protectedRoutes = require("./protected");
 const authRoutes = require("./auth");
-const signupRoutes = require("./signup");
+
 
 // Profile routes
 router.use("/auth", authRoutes); //This contains "/login" & "/refresh"
-router.use("/signup", signupRoutes); //This contains "/signup" 
+
 router.use("/protected", passport.authenticate('jwt', { session: false }), protectedRoutes);
 module.exports = router;

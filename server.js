@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 3001;
 
 require('./auth/jwt')();
 
+
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

@@ -83,7 +83,7 @@ const Login = (props) => {
                             </Form.Row >
                             <Form.Row className="justify-content-center">
                                 <Col sm={8}>
-                                    <Form.Group controlId="Password">
+                                    <Form.Group controlId="password">
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control
                                             autoComplete='current-password'

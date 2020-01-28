@@ -8,7 +8,7 @@ router.route("/login")
   .post(authController.login);
 
   router.route("/signup")
-  .post(signupController.createNew);
+  .post(signupController.signup);
 
 // Matches with "/api/auth/refresh"
 router.route("/refresh")
