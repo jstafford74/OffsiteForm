@@ -35,7 +35,6 @@ class Profile extends Component {
     first_Name: "",
     last_Name: "",
     email: "",
-    personal: "",
     enterprise: "",
     company: "",
     street_address: "",
@@ -44,7 +43,8 @@ class Profile extends Component {
     zip: "",
     work_phone: "",
     cell_phone: "",
-    calendarOpen: false
+    calendarOpen: false,
+    jumbdisp: 'd-none'
   };
   componentDidMount() {
     this.loadProfile();
@@ -61,25 +61,6 @@ class Profile extends Component {
       .catch(err => console.log(err));
   };
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
-    }
-  };
-
 
   render() {
     const {
@@ -94,6 +75,7 @@ class Profile extends Component {
       work_phone,
       cell_phone,
       calendarOpen,
+      jumbdisp
     } = this.state;
 
     return (
@@ -104,11 +86,11 @@ class Profile extends Component {
               <Card.Header>
                 <Row className="justify-content-between">
                   <Nav variant="tabs" defaultActiveKey="#first">
-                    <Nav.Item style={{marginLeft: '1rem'}}>
+                    <Nav.Item style={{ marginLeft: '1rem' }}>
                       <Nav.Link href="#first">Profile</Nav.Link>
                     </Nav.Item>
                   </Nav>
-                  <Button style={{marginRight: '1rem'}} className="text-warning" onClick={() => this.setState({ calendarOpen: true })}>Schedule </Button>
+                  <Button style={{ marginRight: '1rem' }} className="text-warning" onClick={() => this.setState({ calendarOpen: true, jumbdisp: 'd-block' })}>Schedule </Button>
                 </Row>
               </Card.Header>
               <Card.Body className="justify-content-center">
@@ -143,27 +125,19 @@ class Profile extends Component {
                     </tr>
                   </tbody>
                 </Table>
-
-
-
               </Card.Body>
             </Card>
-
           </Col>
         </Row>
         <Row className="justify-content-center mt-4">
           <Col md={10}>
-            <Jumbotron style={Style.jumbo}>
+            <Jumbotron style={Style.jumbo} className={this.state.jumbdisp}>
               <Row >
                 <h4 style={{ color: 'black' }}>Mobile Scheduler</h4>
               </Row>
-
-
               {
                 calendarOpen && <DayInput />
               }
-
-
             </Jumbotron>
           </Col>
         </Row>

@@ -2,7 +2,7 @@ import React from 'react';
 import Plx from "react-plx";
 import Arrange from '../Arrange';
 import { Col, Row } from 'react-bootstrap';
-import ';
+
 
 const textData = [
     {

@@ -26,11 +26,11 @@ const Login = (props) => {
         centered
     >
         <Modal.Header closeButton>
-            <Modal.Title id="login-form">
+            <Modal.Title id="login-form" className="text-align-center">
                 Melanoscan Profile Login
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body style={{backgroundColor:'white'}}>
             <h5 className="card-title">Please enter username & password</h5>
             <Formik
                 initialValues={{ username: '', password: '' }}

@@ -45,7 +45,7 @@ module.exports = {
     getDates: async function (req, res) {
         try {
             const dates = await db.Calendar.findAll({
-                attributes: ['date'],
+                attributes: ['date_n'],
                 where: {
                     company: {
                         [Op.ne]: null

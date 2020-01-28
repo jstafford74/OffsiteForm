@@ -49,7 +49,7 @@ class Calendar extends React.Component {
                 // console.log(res.data)                
                 this.setState(
                     {
-                        dates: res.data
+                        exclDates: res.data
                     }
                 )
 
@@ -72,7 +72,7 @@ class Calendar extends React.Component {
         event.preventDefault();
         if (this.state.date && this.state.company) {
             API.selectDate({
-                date: this.state.date,
+                date_n: this.state.date_n,
                 company: this.state.company,
                 first_name: this.state.first_name,
                 last_Name: this.state.last_Name,
@@ -95,7 +95,7 @@ class Calendar extends React.Component {
 
     render() {
         const {
-            dates,
+            date_n,
             first_Name,
             last_Name,
             email,
@@ -106,6 +106,7 @@ class Calendar extends React.Component {
             zip,
             work_phone,
             cell_phone,
+            exclDates
         } = this.state;
         return (
             <Container className="mt-4">
@@ -166,7 +167,7 @@ class Calendar extends React.Component {
                                     </Col>
                                     <Col md={4}>
                                         {
-                                            !dates.length ? null : dates[0].date
+                                            !exclDates.length ? null : exclDates[0].date
                                         }
                                     </Col>
 
