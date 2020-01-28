@@ -73,7 +73,7 @@ const Signup = (props) => {
                 onSubmit={async (values, formikBag) => {
                     try {
                         const data = await API.signup(values);
-                        console.log(data);
+                        console.log(data.profile);
                         if (data.success) {
                             props.onLogin(data.tokens);
                         } else {

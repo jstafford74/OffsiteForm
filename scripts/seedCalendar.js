@@ -51,7 +51,7 @@ async function workDays(start, end) {
     }
     console.log(calArr)
     try {
-        await db.sequelize.sync({ force: true });
+        await db.sequelize.sync({ force: false });
         const calendar = db.Calendar.bulkCreate(calArr);
         console.log("success", calendar.toJSON());
     } catch (err) {

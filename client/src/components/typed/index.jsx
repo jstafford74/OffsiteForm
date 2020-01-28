@@ -24,7 +24,7 @@ const MainTyping = () => (
                     smartBackspace
                     fadeOut
                     className='text-primary'
-                    fadeOutDelay="2500"
+                    fadeOutDelay={2500}
                 />
             </span>
         </h4>

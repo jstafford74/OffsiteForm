@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Splash from "./pages/Splash";
 import Login from './pages/Login';
 import Profile from "./pages/Profile";
-import Calendar from "./pages/Calendar";
+
 import NoMatch from "./pages/NoMatch";
 import StickyNav from "./components/Nav";
 import Signup from "./pages/Signup";
@@ -24,7 +24,7 @@ export default function App() {
           <ConnectedPublicRoute path="/login" component={Login} />
           <ConnectedPublicRoute path="/signup" component={Signup} />
           <ConnectedPrivateRoute exact path="/profile/" component={Profile} />
-          {/* <ConnectedPrivateRoute path="/Calendar/" component={Calendar} /> */}
+         
           <Route path="*"><NoMatch /></Route>
         </Switch>
 

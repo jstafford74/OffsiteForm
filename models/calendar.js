@@ -3,7 +3,7 @@
 module.exports = function (sequelize, DataTypes) {
   var Calendar = sequelize.define('Calendar', {
     
-    'date': {
+    'date_n': {
       type: DataTypes.DATEONLY,
       allowNull: true,
       comment: "null"

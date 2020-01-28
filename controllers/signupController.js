@@ -1,50 +1,7 @@
 const db = require("../models");
-
-// Defining methods for the profile creation
-
-// signup: async function (req, res) {
-
-//   try {
-//     let preExistingUser = await db.Profile.findAll({
-//       where: {
-//         username: req.body.username,
-//         password: req.body.password
-//       }
-//     });
-//     if (preExistingUser) {
-//       res.status(200).json({
-//         success: false,
-//         errors: { username: 'Username already exists' }
-//       });
-//       return;
-//     }
-
-//     preExistingUser = await db.Profile.findAll({ email: req.body.email });
-//     if (preExistingUser) {
-//       res.status(200).json({
-//         success: false,
-//         errors: { email: 'Email already exists' }
-//       });
-//       return;
-//     }
-
-//     req.body.passwordHash = await bcrypt.hash(req.body.password, parseInt(process.env.PASSWORD_SALT_ROUNDS, 10));
-//     const newUser = await db.User.create(req.body),
-//       jwts = makeJwts(newUser);
-
-//     await saveRefreshToken(jwts.refresh, newUser);
-
-//     res.json({
-//       success: true,
-//       tokens: jwts
-//     })
-//   } catch (error) {
-//     console.log(error);
-//     respondWithServerError(res, error);
-//   }
-
-// }
-
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const randomstring = require("randomstring");
 
 module.exports = {
   signup: async function (req, res) {
@@ -94,14 +51,16 @@ module.exports = {
         passwordHash: req.body.passwordHash
       });
 
-      jwts = makeJwts(newUser);
 
-      await saveRefreshToken(jwts.refresh, newUser);
-      console.log(newUser)
-      console.log(jwts)
+      // jwts = makeJwts(newUser);
+      // console.log(jwts)
+      // await saveRefreshToken(jwts.refresh, newUser);
+
+      // console.log(jwts)
       res.json({
         success: true,
-        tokens: jwts
+        // tokens: jwts,
+        profile: newUser
       })
     } catch (error) { console.log(error) }
 
@@ -118,15 +77,37 @@ function respondWithServerError(res, error) {
 function makeJwts(user) {
   const access = jwt.sign(
     {
-      first_Name: user.dataValues.first_Name,
-      id: user.dataValues.id
+      first_Name: user.first_Name,
+      role: user.role
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: process.env.ACCESS_TOKEN_DURATION,
-      subject: user._id.toString(),
-      issuer: 'melanoscan-api',
-      audience: 'melanoscan-react-gui'
+      subject: user.id.toString(),
+      issuer: 'readinglist-api',
+      audience: 'readinglist-react-gui'
     }
-  )
+  );
+
+  const refresh = jwt.sign(
+    {},
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.REFRESH_TOKEN_DURATION,
+      subject: randomstring.generate(),
+      issuer: 'readinglist-api',
+      audience: 'readinglist-react-gui'
+    }
+  );
+
+  return {
+    access,
+    refresh
+  };
+}
+
+
+function saveRefreshToken(token, user) {
+  const { sub, exp } = jwt.decode(token);
+  return db.Tokens.create({ token: sub, purpose: 'REFRESH', expiresAt: exp * 1000, user: user.id });
 }

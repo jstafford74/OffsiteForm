@@ -7,13 +7,13 @@ const db = require("../models");
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.ACCESS_TOKEN_SECRET,
-    issuer: 'readinglist-api',
-    audience: 'readinglist-react-gui'
+    issuer: 'melanoscan-api',
+    audience: 'melanoscan-react-gui'
 };
 
 async function verifyCallback(jwt_payload, done) {
     let user, err;
-
+    console.log(jwt_payload)
     try {
         user = await db.Profile.findOne({
             where: {

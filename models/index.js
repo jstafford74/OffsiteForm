@@ -24,7 +24,7 @@ fs
   .forEach(file => {
     const model = sequelize['import'](path.join(__dirname, file));
     db[model.name] = model;
-    
+
   });
 
 Object.keys(db).forEach(modelName => {
@@ -32,6 +32,9 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
+
+db.Profile.hasMany(db.Tokens); // Will add userId to Task model
+db.Tokens.belongsTo(db.Profile);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

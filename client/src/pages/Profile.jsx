@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { onLoginData, onLoginDates } from '../redux/actions'
+import { onLoginData} from '../redux/actions'
 import API from "../api";
 import { connect } from 'react-redux'
 import DayInput from '../components/cal';
@@ -75,7 +75,7 @@ class Profile extends Component {
       work_phone,
       cell_phone,
       calendarOpen,
-      jumbdisp
+     
     } = this.state;
 
     return (
