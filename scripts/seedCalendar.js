@@ -29,27 +29,29 @@ async function workDays(start, end) {
     holidays.forEach((holi) => {
         names.push(Object.values(holi)[0]);
         dates.push(moment(Object.values(holi)[1]).utcOffset(300)._d);
-        dates = dates.map(it => moment(it, 'MM-DD-YYYY')._d)
-
 
     })
-    moment.updateLocale('en', {
-        holidays: dates,
-        holidayFormat: 'MM-DD-YYYY'
-    });
 
-    for (let i = 0; i < diff; i++) {
-        let newWD = start.businessAdd(i)._d;
+    for (let i = 0; i < dates.length; i++) {
+
+        dates[i] = moment(dates[i]).format('MM-DD-YYYY')
+    }
+
+
+    for (let j = 0; j < diff; j++) {
+        let newWD = start.businessAdd(j)._d;
 
         if (moment(newWD).isHoliday() == false) {
-            workDates.push(moment(newWD, 'MM-DD-YYYY')._d);
-            calArr[i] = new Calendar();
-            calArr[i].makeCalendar(moment(newWD).format('MM-DD-YYYY'));
+            let workDay = moment(newWD).format('MM-DD-YYYY')
+            workDates.push(workDay);
+            calArr[j] = new Calendar();
+            calArr[j].makeCalendar(workDay);
         }
 
     }
+    console.log(calArr)
     try {
-        await db.sequelize.sync({ force: false });
+        await db.sequelize.sync({ force: true });
         const calendar = db.Calendar.bulkCreate(calArr);
         console.log("success", calendar.toJSON());
     } catch (err) {
