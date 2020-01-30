@@ -25,20 +25,12 @@ app.use(routes);
 // Connect to the DB
 async function startup() {
   const dbOutput = await db.sequelize.sync({ force: false });
-  
+
   console.log('----------------------------');
   console.log('DATABASE SERVER CONNECTED');
   console.group('DATABASE CONFIG');
   console.table(dbOutput.config);
   console.groupEnd();
-
-  // Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-  // console.group('DATABASE OPTIONS');
-  // console.table(dbOutput.options);
-  // console.groupEnd();
 
   await app.listen(PORT);
   console.log('----------------------------');
