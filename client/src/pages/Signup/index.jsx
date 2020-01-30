@@ -344,8 +344,6 @@ const Signup = (props) => {
 
 };
 
-// export default Signup;
-
 export default connect(
     // mapStateToProps
     null,
