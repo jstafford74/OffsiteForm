@@ -33,8 +33,8 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-db.Profile.hasMany(db.Tokens); // Will add userId to Task model
-db.Tokens.belongsTo(db.Profile);
+
+db.Tokens.belongsTo(db.User);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

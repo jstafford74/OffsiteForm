@@ -70,5 +70,5 @@ class Profile {
     };
 }
 
-module.exports = Profile;
+module.exports = Proffile;
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
-import { onLoginData } from '../../redux/actions'
+import { onLogin } from '../../redux/actions'
 import API from '../../api'
 import { ServerError } from '../../components/Form';
 
@@ -350,5 +350,5 @@ export default connect(
     // mapStateToProps
     null,
     // mapDispatchToProps
-    { onLoginData }
+    { onLogin }
 )(Signup);

@@ -1,4 +1,4 @@
-class Calendar {
+class Callendar {
     constructor(date_n) {
         this.date_n = date_n;
         this.company = null;
@@ -17,7 +17,7 @@ class Calendar {
     }
 
     
-    makeCalendar(date_n) {
+    makeCallendar(date_n) {
         this.date_n = date_n;
         this.company = null;
         this.first_Name = null;
@@ -35,4 +35,4 @@ class Calendar {
     };
 }
 
-module.exports = Calendar;
+module.exports = Callendar;

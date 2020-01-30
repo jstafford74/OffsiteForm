@@ -15,7 +15,7 @@ async function verifyCallback(jwt_payload, done) {
     let user, err;
     console.log(jwt_payload)
     try {
-        user = await db.Profile.findOne({
+        user = await db.User.findOne({
             where: {
                 id: jwt_payload.sub
             }

@@ -1,12 +1,12 @@
 require('dotenv').config();
 var db = require('../models');
-var Calendar = require("./calendar_class.js");
+var Callendar = require("./calendar_class.js");
 const moment = require('moment-business-days');
 const fedHolidays = require('@18f/us-federal-holidays');
 
 
 
-const start = moment('01-01-2020', 'MM-DD-YYYY');
+const start = moment('12-31-2019', 'MM-DD-YYYY');
 const end = moment('12-31-2020', 'MM-DD-YYYY');
 const options = { shiftSaturdayHolidays: true, shiftSundayHolidays: true };
 const holidays = fedHolidays.allForYear(2020, options);
@@ -44,8 +44,8 @@ async function workDays(start, end) {
         if (moment(newWD).isHoliday() == false) {
             let workDay = moment(newWD).format('MM-DD-YYYY')
             workDates.push(workDay);
-            calArr[j] = new Calendar();
-            calArr[j].makeCalendar(workDay);
+            calArr[j] = new Callendar();
+            calArr[j].makeCallendar(workDay);
         }
 
     }
