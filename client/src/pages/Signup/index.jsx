@@ -100,7 +100,7 @@ const Signup = (props) => {
                             <ServerError axiosError={status} />
 
                             <Form.Row>
-                                <Form.Group as={Col} controlId="signupFirstName">
+                                <Form.Group as={Col} controlId="signupfirst_Name">
                                     <Form.Label>First name</Form.Label>
                                     <Form.Control
                                         required
@@ -117,7 +117,7 @@ const Signup = (props) => {
                                         {errors.first_Name && touched.first_Name && errors.first_Name}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="signupLastName">
+                                <Form.Group as={Col} controlId="signuplast_Name">
                                     <Form.Label>Last name</Form.Label>
                                     <Form.Control
                                         required

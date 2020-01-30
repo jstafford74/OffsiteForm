@@ -165,7 +165,7 @@ function respondWithServerError(res, error) {
 function makeJwts(user) {
   const access = jwt.sign(
     {
-      firstName: user.firstName,
+      first_Name: user.first_Name,
       role: user.role
     },
     process.env.ACCESS_TOKEN_SECRET,

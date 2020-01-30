@@ -53,8 +53,8 @@ class Profile {
 
     makeProfileData() {
 
-        this.first_Name = faker.name.firstName();
-        this.last_Name = faker.name.lastName();
+        this.first_Name = faker.name.first_Name();
+        this.last_Name = faker.name.last_Name();
         this.email = faker.internet.email();
         this.personal = 0;
         this.enterprise = 1;

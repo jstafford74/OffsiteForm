@@ -57,7 +57,7 @@ const setUserDetails = () => {
     const accessJot = new JotBrowser('JWT_ACCESS');
     return accessJot.getToken() ?
         {
-            firstName: accessJot.getClaim('firstName'),
+            first_Name: accessJot.getClaim('first_Name'),
             role: accessJot.getClaim('role'),
             id: accessJot.getClaim('sub')
         } :
@@ -75,7 +75,7 @@ export const initialState = {
 //         const profile = await axios.get("/profile/");
 
 //         return {
-//             firstName: accessJot.getClaim('firstName'),
+//             first_Name: accessJot.getClaim('first_Name'),
 //             role: accessJot.getClaim('role'),
 //             id: accessJot.getClaim('sub'),
 //             ...profile.data
