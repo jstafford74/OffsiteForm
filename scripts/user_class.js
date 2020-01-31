@@ -30,8 +30,8 @@ class Usser {
 
     makeUsserData() {
 
-        this.first_Name = faker.name.first_Name();
-        this.last_Name = faker.name.last_Name();
+        this.first_Name = faker.name.firstName();
+        this.last_Name = faker.name.lastName();
         this.email = faker.internet.email();
         this.username = `${this.first_Name}.${this.last_Name}`;
         this.passwordHash = bcrypt.hashSync('12345678', 10);
