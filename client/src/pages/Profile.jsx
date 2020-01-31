@@ -54,8 +54,9 @@ class Profile extends Component {
   loadProfile = () => {
     API.getProfile()
       .then(res => {
-        this.props.onLoginData(res.data)
-        this.setState(res.data)
+        // this.props.onLoginData(res.data)
+        console.log(res.data[0]);
+        this.setState(res.data[0])
       }
       )
       .catch(err => console.log(err));
@@ -96,7 +97,7 @@ class Profile extends Component {
               <Card.Body className="justify-content-center">
                 <Card.Title >
                   <Row >
-                    <Col className="text-info" md={6}>{first_Name} {last_Name}</Col>
+                    <Col className="text-info" md={6}>{this.state.first_Name} {this.state.last_Name}</Col>
                     <Col className="text-info" md={6}>{company}</Col>
                   </Row>
                 </Card.Title>
@@ -112,10 +113,10 @@ class Profile extends Component {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>{street_address}</td>
-                      <td className="colspan-2">{email}</td>
+                      <td>{this.state.street_address}</td>
+                      <td className="colspan-2">{this.state.email}</td>
                       <td>Cell</td>
-                      <td>{cell_phone}</td>
+                      <td>{this.state.cell_phone}</td>
                     </tr>
                     <tr>
                       <td>{city}, {st} {zip}</td>
