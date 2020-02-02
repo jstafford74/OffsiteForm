@@ -6,7 +6,7 @@
  */
 
 import { Browser as JotBrowser } from 'jwt-jot'
-import { LOGIN, LOGOUT , GET_PROFILE, GET_DATES} from "../actionTypes";
+import { LOGIN, LOGOUT, GET_PROFILE, GET_DATES } from "../actionTypes";
 
 export default function (state = initialState, action) {
     switch (action.type) {

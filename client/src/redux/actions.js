@@ -2,7 +2,8 @@ import {
     LOGIN,
     LOGOUT,
     GET_DATES,
-    GET_PROFILE
+    GET_PROFILE,
+    SET_DATE
 } from "./actionTypes";
 
 /**
@@ -33,6 +34,13 @@ export const onLoginData = (userData) => ({
         userData
     }
 });
+
+export const onSetDate = (formData) => ({
+    type: SET_DATE,
+    payload: {
+        formData
+    }
+})
 
 export const onLoginDates = (exclDates) => ({
     type: GET_DATES,

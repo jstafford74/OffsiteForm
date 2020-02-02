@@ -28,6 +28,9 @@ const Style = {
   },
   card: {
     maxWidth: '700px'
+  },
+  input:{
+    borderBottom: 'solid black 1px'
   }
 }
 class Profile extends Component {
@@ -71,12 +74,12 @@ class Profile extends Component {
       company,
       street_address,
       city,
-      st,
+      state,
       zip,
       work_phone,
       cell_phone,
       calendarOpen,
-     
+     jumbdisp
     } = this.state;
 
     return (
@@ -97,8 +100,8 @@ class Profile extends Component {
               <Card.Body className="justify-content-center">
                 <Card.Title >
                   <Row >
-                    <Col className="text-info" md={6}>{this.state.first_Name} {this.state.last_Name}</Col>
-                    <Col className="text-info" md={6}>{company}</Col>
+                    <Col className="text-info" md={6}>Name: {first_Name} {last_Name}</Col>
+                    <Col className="text-info" md={6}>Company: {company}</Col>
                   </Row>
                 </Card.Title>
 
@@ -113,13 +116,13 @@ class Profile extends Component {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>{this.state.street_address}</td>
-                      <td className="colspan-2">{this.state.email}</td>
+                      <td>{street_address}</td>
+                      <td className="colspan-2">{email}</td>
                       <td>Cell</td>
-                      <td>{this.state.cell_phone}</td>
+                      <td>{cell_phone}</td>
                     </tr>
                     <tr>
-                      <td>{city}, {st} {zip}</td>
+                      <td>{city}, {state} {zip}</td>
                       <td></td>
                       <td>Work</td>
                       <td>{work_phone}</td>
@@ -132,7 +135,7 @@ class Profile extends Component {
         </Row>
         <Row className="justify-content-center mt-4">
           <Col md={10}>
-            <Jumbotron style={Style.jumbo} className={this.state.jumbdisp}>
+            <Jumbotron style={Style.jumbo} className={jumbdisp}>
               <Row >
                 <h4 style={{ color: 'black' }}>Mobile Scheduler</h4>
               </Row>

@@ -1,21 +1,10 @@
-label {
-    font-size: 1.2rem;
-    color: black;
-}
+.rdp {
+    background: salmon;
+  }
+  /* head element */
+  .rdp-head {
+    font-weight: bold;
+    color: blue;
+  }
 
-input {
-    border: solid purple;
-}
-
-.form-control {
-    border: 1px solid black;
-    max-width: 100%;
-}
-
-.form-control::placeholder {
-    color: green;
-}
-
-.col-md-6{
-    max-width:70%
-}
+  /* //https://github.com/gpbl/react-day-picker/blob/master/website/docs/guides/styling.mdx// */

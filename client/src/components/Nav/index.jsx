@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { Button, Navbar, Nav } from 'react-bootstrap';
+import { Container, Button, Navbar, Nav, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 import { onLogout } from '../../redux/actions'
@@ -14,26 +14,38 @@ const Style = {
   },
   navLink: {
     color: "black",
-    fontSize: "1.25rem",
+    fontSize: "1.25rem"
 
   }
+
 }
+
+
 const StickyNav = (props) => {
-  return <Navbar className="justify-content-end" style={Style.nav} sticky='top' >
-    <Navbar.Brand href="/" >Melanoscan</Navbar.Brand>
-    <Nav >
-      <Nav.Link style={Style.nav} href="#home">How</Nav.Link>
-      <Nav.Link style={Style.nav} href="#features">About Us</Nav.Link>
-      <Nav.Link style={Style.nav} href="#pricing">Contact Sales</Nav.Link>
-      {
-        props.user ?
-          <Button onClick={props.onLogout}>Logout</Button> :
-          <Link to={"/login"}>
-            <Button>Login</Button>
-          </Link>
-      }
-    </Nav>
-  </Navbar>;
+  return <Navbar hover collapseOnSelect expand='lg' style={Style.nav} sticky='top' >
+    <Col lg={4}>
+      <Navbar.Brand href='/' >Melanoscan</Navbar.Brand>
+    </Col>
+    <Navbar.Toggle aria-controls='respnav' />
+    {/* <Col lg={{ span: 6, offset: 2 }} > */}
+    <Navbar.Collapse id='respnav' className='justify-content-end'  >
+      <Nav fill>
+        <Nav.Link style={Style.nav} href="#home">How it Works</Nav.Link>
+        <Nav.Link style={Style.nav} href="#features">About Us</Nav.Link>
+        <Nav.Link style={Style.nav} href="#pricing">Contact Sales</Nav.Link>
+        {
+          props.user ?
+            <Button onClick={props.onLogout}>Logout</Button> :
+            <Link to={"/login"}>
+              <Button size='lg' variant='danger'>Login</Button>
+            </Link>
+        }
+      </Nav>
+    </Navbar.Collapse>
+
+    {/* </Col> */}
+
+  </Navbar >;
 
 };
 
