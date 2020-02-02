@@ -35,12 +35,6 @@ export const onLoginData = (userData) => ({
     }
 });
 
-export const onSetDate = (formData) => ({
-    type: SET_DATE,
-    payload: {
-        formData
-    }
-})
 
 export const onLoginDates = (exclDates) => ({
     type: GET_DATES,
