@@ -11,7 +11,7 @@ module.exports = {
                 }
             });
             res.json(profile);
-            console.log(profile)
+            
         } catch (error) { console.log(error) }
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import { Form, Col, Row, Button,Jumbotron } from 'react-bootstrap';
+import { Form, Col, Row, Button, Jumbotron } from 'react-bootstrap';
 import API from '../../api'
 import './calstyle.css'
 import { Formik } from 'formik';
@@ -14,29 +14,48 @@ export default class DayInput extends React.Component {
         this.handleChange = this.handleDayClick.bind(this);
         this.state = {
             selectedDay: null,
-            dates: [],
-            first_Name:'',
-            last_Name:'',
-            email:'',
-            company:'',
-            street_address:'',
-            city:'',
-            state:'',
-            zip:'',
-            work_phone:'',
-            cell_phone:'',
+            exclDates: [],
+            first_Name: '',
+            last_Name: '',
+            email: '',
+            company: '',
+            street_address: '',
+            city: '',
+            state: '',
+            zip: '',
+            work_phone: '',
+            cell_phone: '',
             submitFormOpen: false
         };
     }
 
     componentDidMount() {
         this.loadCalendar();
+        this.loadProfile();
     }
 
     loadCalendar = () => {
+        const xDates = []
         API.getDates()
             .then(res =>
-                console.log(res.data)
+
+                res.data.forEach(item => {
+                    xDates.push(item.date_n)
+                }),
+                this.setState({ exclDates: xDates })
+
+
+                // this.setState({ exclDates: res.data })
+            )
+            .catch(err => console.log(err));
+    };
+    loadProfile = () => {
+        API.getProfile()
+            .then(res => {
+                // this.props.onLoginData(res.data)
+                console.log(res.data[0]);
+                this.setState(res.data[0])
+            }
             )
             .catch(err => console.log(err));
     };
@@ -69,7 +88,8 @@ export default class DayInput extends React.Component {
             work_phone,
             cell_phone,
             selectedDay,
-            submitFormOpen
+            submitFormOpen,
+            exclDates
         } = this.state;
 
         const modifiers = {
@@ -78,6 +98,7 @@ export default class DayInput extends React.Component {
             toMonth: new Date(2020, 12),
             disabled:
                 [{ daysOfWeek: [0, 6] },
+                { exclDates },
                 {
                     after: new Date(2020, 3, 20),
                     before: new Date(2020, 3, 25)
@@ -99,7 +120,7 @@ export default class DayInput extends React.Component {
                 backgroundColor: 'green'
             },
             disabled: {
-
+                color: 'red',
                 backgroundColor: '#fdfefe'
             }
 

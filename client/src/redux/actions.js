@@ -28,10 +28,10 @@ export const onLogout = () => ({
 });
 
 
-export const onLoginData = (userData) => ({
+export const onLoginData = (profileData) => ({
     type: GET_PROFILE,
     payload: {
-        userData
+        profileData
     }
 });
 

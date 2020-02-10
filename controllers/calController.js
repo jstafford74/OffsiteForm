@@ -44,7 +44,7 @@ module.exports = {
     },
     getDates: async function (req, res) {
         try {
-            const dates = await db.Calendar.findAll({
+            let dates = await db.Calendar.findAll({
                 attributes: ['date_n'],
                 where: {
                     company: {
@@ -52,7 +52,7 @@ module.exports = {
                     }
                 }
             })
-            // console.log(dates)
+
             res.json(dates)
         } catch (error) { console.log(error) }
     }
