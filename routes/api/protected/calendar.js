@@ -3,9 +3,10 @@ const calController = require("../../../controllers/calController");
 
 // Matches with "/api/protected/calendar"
 router.route("/")
-    .get(calController.getDates)
-    .put(calController.setDates);
+    .get(calController.getDates);
 
+router.route("/:date")
+    .put(calController.setEvent);
 
 
 module.exports = router;

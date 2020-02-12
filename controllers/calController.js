@@ -3,45 +3,34 @@ const Op = db.Sequelize.Op;
 
 // Defining methods for the calendarController
 module.exports = {
-    setDates: async function (req, res) {
+    setEvent: async function (req, res) {
+        console.log(req.body)
         try {
-            await db.Calendar.bulkCreate([
-                req.body.date,
-                req.body.company,
-                req.body.first_name,
-                req.body.last_Name,
-                req.body.email,
-                req.body.phone,
-                req.body.location,
-                req.body.address,
-                req.body.city,
-                req.body.state,
-                req.body.zip,
-                req.body.start_time,
-                req.body.end_time,
-                req.body.num_avail
-            ],
-                {
-                    fields: [
-                        'date',
-                        'company',
-                        'first_Name',
-                        'last_Name',
-                        'email',
-                        'phone',
-                        'location',
-                        'address',
-                        'city',
-                        'state',
-                        'zip',
-                        'start_time',
-                        'end_time',
-                        'num_avail'],
-                    updateOnDuplicate: ["date"]
-                });
-
-        } catch (error) { console.log(error) }
+            const event = await db.Calendar.update({
+                company: req.body.company,
+                first_Name: req.body.first_Name,
+                email: req.body.email,
+                phone: req.body.phone,
+                location: req.body.location,
+                address: req.body.address,
+                city: req.body.city,
+                state: req.body.state,
+                start_time: req.body.start_time,
+                end_time: req.body.end_time,
+                num_avail: req.body.num_avail
+            }, {
+                where: {
+                    date_n: req.params.date
+                }
+            })
+            return res.status(201).json({
+                event,
+            });
+        } catch (error) {
+            return res.status(500).json({ error: error.message })
+        }
     },
+
     getDates: async function (req, res) {
         try {
             let dates = await db.Calendar.findAll({

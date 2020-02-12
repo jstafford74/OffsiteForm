@@ -56,6 +56,11 @@ export default class DayInput extends React.Component {
             .catch(err => console.log(err));
     };
 
+    setEvent = (req, res) => {
+        API.setEvent(req)
+            .then(res => console.log(res))
+    }
+
     handleDayClick(day, modifiers = {}) {
         if (modifiers.disabled) {
             return;
@@ -66,6 +71,9 @@ export default class DayInput extends React.Component {
         });
     }
 
+    handleChanges(event) {
+        this.setState({ value: event.target.value });
+    }
 
 
     render() {
@@ -261,7 +269,7 @@ export default class DayInput extends React.Component {
                                                             location: values.location,
                                                             start_time: values.start_time,
                                                             end_time: values.end_time,
-                                                            numavail: values.numavail,
+                                                            num_avail: values.num_avail,
 
                                                         })
                                                     }
@@ -329,8 +337,8 @@ export default class DayInput extends React.Component {
                                 <Form.Label style={Style.label}> Onsite Employees </Form.Label>
                                 <Form.Control
                                     style={Style.input}
-                                    defaultValue='100'
-                                    type='number'
+                                    defaultValue={this.state.num_avail}
+
                                     ref={this.input}
                                 />
                             </Form.Group>
@@ -358,6 +366,7 @@ export default class DayInput extends React.Component {
                                     style={Style.input}
                                     defaultValue={this.state.state}
                                     ref={this.input}
+                                    onChange={this.handleChanges}
                                 />
                             </Form.Group>
                         </Form.Row>
@@ -367,6 +376,7 @@ export default class DayInput extends React.Component {
                                 <Form.Control style={Style.input}
                                     defaultValue={this.state.start_time}
                                     ref={this.input}
+                                    onChange={this.handleChanges}
                                 />
 
                             </Form.Group>
@@ -375,33 +385,54 @@ export default class DayInput extends React.Component {
                                 <Form.Control style={Style.input}
                                     defaultValue={this.state.end_time}
                                     ref={this.input}
+                                    onChange={this.handleChanges}
                                 />
                             </Form.Group>
                             <Form.Group as={Col} md="4">
                                 <Form.Label style={Style.label}>Date</Form.Label>
                                 <Form.Control style={Style.input}
+                                    controlId='date'
                                     defaultValue={this.state.selectedDay}
                                     ref={this.input}
+                                    onChange={this.handleChanges}
                                 />
                             </Form.Group>
                         </Form.Row>
+
+
+                        <Form.Row className="justify-content-center">
+                            <Col md={12} sm={6} ml={2}>
+                                <Button size="md"
+                                    variant="btn btn-outline-primary"
+                                    type="submit"
+                                    block
+
+                                    onClick={(event) => {
+                                        event.preventDefault();
+                                        // console.log(this.state)
+                                        let req = {
+                                            date: this.state.selectedDay,
+                                            first_Name: this.state.first_Name,
+                                            email: this.state.email,
+                                            location: this.state.location,
+                                            street_address: this.state.street_address,
+                                            city: this.state.city,
+                                            state: this.state.state,
+                                            phone: this.state.work_phone,
+                                            company: this.state.company,
+                                            start_time: this.state.start_time,
+                                            end_time: this.state.end_time,
+                                            num_avail: this.state.num_avail,
+                                        };
+                                        this.setEvent(req);
+                                    }
+                                    }
+                                >
+                                    Submit Event
+                                    </Button>
+                            </Col>
+                        </Form.Row>
                     </Form>
-                    <Row>
-                        <Col>
-                            Company: {this.state.company}
-                        </Col>
-                        <Col>
-                            Date: {this.state.selectedDay}
-                        </Col>
-                        <Col>
-                            Location:{this.state.location}
-                        </Col>
-                    </Row>
-                    <div>
-                        You have selected {this.state.selectedDay} at {this.state.location}
-                    </div>
-
-
                 </Container>
             </>
         );

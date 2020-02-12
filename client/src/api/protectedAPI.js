@@ -11,6 +11,9 @@ export default {
     },
     getProfile: function () {
         return axiosP.get("/profile/");
+    },
+    setEvent: function () {
+        return axiosP.post("/calendar/");
     }
 };
 
