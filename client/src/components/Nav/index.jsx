@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { Container, Button, Navbar, Nav, Col } from 'react-bootstrap';
+import { Button, Navbar, Nav, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 import { onLogout } from '../../redux/actions'

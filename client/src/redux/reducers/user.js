@@ -67,7 +67,7 @@ const setUserDetails = () => {
 
 
 const setProfile = async () => {
-    const profile = await axios.get("/profile/");
+    const profile = await axios.get("/profile");
     return {
         ...profile.data
     }

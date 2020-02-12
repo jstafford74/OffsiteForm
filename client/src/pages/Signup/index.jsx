@@ -36,6 +36,27 @@ const schema = yup.object({
 const Signup = (props) => {
 
     const [enterprise, setEnterprise] = useState(false);
+    const Style = {
+        header: {
+            padding: 0,
+            margin: 0,
+            backgroundColor: '#2A9FD6',
+
+        },
+        body: {
+            backgroundColor: 'white',
+        },
+        title: {
+            color: 'black',
+        },
+        label: {
+            marginBottom: 4,
+        },
+        input: {
+            border: 'solid black 1px',
+
+        }
+    }
 
     return <Modal
         show={true}
@@ -91,7 +112,7 @@ const Signup = (props) => {
                     errors,
                     touched,
                     handleChange,
-                    handleBlur,
+                    // handleBlur,
                     handleSubmit,
                     isSubmitting,
                     /* and other goodies */
@@ -101,7 +122,7 @@ const Signup = (props) => {
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="signupfirst_Name">
-                                    <Form.Label>First name</Form.Label>
+                                    <Form.Label style={Style.label} >First name</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='given-name'
@@ -109,16 +130,17 @@ const Signup = (props) => {
                                         type='text'
                                         placeholder="First name"
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.first_Name}
                                         isInvalid={!!errors.first_Name}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.first_Name && touched.first_Name && errors.first_Name}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="signuplast_Name">
-                                    <Form.Label>Last name</Form.Label>
+                                    <Form.Label style={Style.label} >Last name</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='family-name'
@@ -126,9 +148,10 @@ const Signup = (props) => {
                                         type='text'
                                         placeholder="Last name"
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.last_Name}
                                         isInvalid={!!errors.last_Name}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.last_Name && touched.last_Name && errors.last_Name}
@@ -138,7 +161,7 @@ const Signup = (props) => {
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="signupEmail">
-                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Label style={Style.label}>Email address</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='email'
@@ -146,16 +169,17 @@ const Signup = (props) => {
                                         type='email'
                                         placeholder='Email address'
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.email}
                                         isInvalid={!!errors.email}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.email && touched.email && errors.email}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="signupAddress">
-                                    <Form.Label>Street Address</Form.Label>
+                                    <Form.Label style={Style.label}>Street Address</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='address'
@@ -163,9 +187,10 @@ const Signup = (props) => {
                                         type='text'
                                         placeholder='Street address'
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.street_address}
                                         isInvalid={!!errors.street_address}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.street_address && touched.street_address && errors.street_address}
@@ -174,7 +199,7 @@ const Signup = (props) => {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} md="4" controlId='workPhone'>
-                                    <Form.Label>Work Phone</Form.Label>
+                                    <Form.Label style={Style.label}>Work Phone</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='phone'
@@ -182,16 +207,17 @@ const Signup = (props) => {
                                         type='text'
                                         placeholder='Work Phone'
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.work_phone}
                                         isInvalid={!!errors.work_phone}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type='invalid'>
                                         {errors.work_phone && touched.work_phone && errors.work_phone}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} md="4" controlId='signupCity'>
-                                    <Form.Label>City</Form.Label>
+                                    <Form.Label style={Style.label}>City</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='city'
@@ -199,9 +225,10 @@ const Signup = (props) => {
                                         type='text'
                                         placeholder="City"
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.city}
                                         isInvalid={!!errors.city}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type='invalid'>
                                         {errors.city && touched.city && errors.city}
@@ -209,7 +236,7 @@ const Signup = (props) => {
                                 </Form.Group>
 
                                 <Form.Group as={Col} md="2" controlId="signupState">
-                                    <Form.Label>St</Form.Label>
+                                    <Form.Label style={Style.label}>St</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='St'
@@ -217,16 +244,17 @@ const Signup = (props) => {
                                         type='text'
                                         placeholder="St"
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.state}
                                         isInvalid={!!errors.state}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.state && touched.state && errors.state}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} md="2" controlId="signupZip">
-                                    <Form.Label>Zip</Form.Label>
+                                    <Form.Label style={Style.label}>Zip</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='Zip'
@@ -234,9 +262,10 @@ const Signup = (props) => {
                                         type='text'
                                         placeholder="Zip"
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.zip}
                                         isInvalid={!!errors.zip}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.zip && touched.zip && errors.zip}
@@ -245,7 +274,7 @@ const Signup = (props) => {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} md="4" controlId="cellPhone">
-                                    <Form.Label>Cell Phone</Form.Label>
+                                    <Form.Label style={Style.label}>Cell Phone</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='phone'
@@ -253,9 +282,10 @@ const Signup = (props) => {
                                         type='text'
                                         placeholder="Cell Phone"
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.cell_phone}
                                         isInvalid={!!errors.cell_phone}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.cell_phone && touched.cell_phone && errors.cell_phone}
@@ -275,7 +305,7 @@ const Signup = (props) => {
                                 </Form.Group>
                                 {enterprise ?
                                     <Form.Group as={Col} md="4" controlId="company">
-                                        <Form.Label>Company</Form.Label>
+                                        <Form.Label style={Style.label}>Company</Form.Label>
                                         <Form.Control
                                             required
                                             autoComplete='company'
@@ -283,9 +313,10 @@ const Signup = (props) => {
                                             type='text'
                                             placeholder="Company"
                                             onChange={handleChange}
-                                            onBlur={handleBlur}
+                                            // onBlur={handleBlur}
                                             value={values.company}
                                             isInvalid={!!errors.company}
+                                            style={Style.input}
                                         />
                                         <Form.Control.Feedback type="invalid">
                                             {errors.cell_phone && touched.cell_phone && errors.cell_phone}
@@ -296,7 +327,7 @@ const Signup = (props) => {
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="username">
-                                    <Form.Label>Username</Form.Label>
+                                    <Form.Label style={Style.label}>Username</Form.Label>
                                     <Form.Control
                                         required
                                         name='username'
@@ -305,9 +336,10 @@ const Signup = (props) => {
 
                                         type="text"
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.username}
                                         isInvalid={!!errors.username}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.username && touched.username && errors.username}
@@ -316,16 +348,17 @@ const Signup = (props) => {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="password">
-                                    <Form.Label>Password</Form.Label>
+                                    <Form.Label style={Style.label}>Password</Form.Label>
                                     <Form.Control
                                         required
                                         autoComplete='new-password'
                                         name='password'
                                         type='text'
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         value={values.password}
                                         isInvalid={!!errors.password}
+                                        style={Style.input}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.password && touched.password && errors.password}

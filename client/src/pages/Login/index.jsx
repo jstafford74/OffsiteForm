@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
+import { Button, Col, Form, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -26,6 +26,9 @@ const Style = {
     },
     title: {
         color: 'black',
+    },
+    label: {
+        marginBottom: 4,
     },
     input: {
         borderBottom: 'solid black 1px',
@@ -71,7 +74,7 @@ const Login = (props) => {
                     errors,
                     touched,
                     handleChange,
-                    handleBlur,
+                    // handleBlur,
                     handleSubmit,
                     isSubmitting,
                     /* and other goodies */
@@ -82,14 +85,14 @@ const Login = (props) => {
                                 <Col sm={10} ml={2} >
                                     <Form.Group controlId="username">
 
-                                        {/* <Form.Label>Username</Form.Label> */}
+                                        <Form.Label style={Style.label}>Username</Form.Label>
                                         <Form.Control
                                             required
                                             name='username'
                                             placeholder='Username'
                                             type='text'
                                             onChange={handleChange}
-                                            onBlur={handleBlur}
+                                            // onBlur={handleBlur}
                                             value={values.username}
                                             isInvalid={!!errors.username}
                                             style={Style.input}
@@ -104,7 +107,7 @@ const Login = (props) => {
                             <Form.Row className="justify-content-center">
                                 <Col sm={10} ml={2}>
                                     <Form.Group controlId="password">
-                                        {/* <Form.Label>Password</Form.Label> */}
+                                        <Form.Label style={Style.label}>Password</Form.Label>
                                         <Form.Control
                                             autoComplete='current-password'
                                             required
@@ -112,7 +115,7 @@ const Login = (props) => {
                                             type="text"
                                             placeholder="Password"
                                             onChange={handleChange}
-                                            onBlur={handleBlur}
+                                            // onBlur={handleBlur}
                                             value={values.password}
                                             isInvalid={!!errors.password}
                                             style={Style.input}

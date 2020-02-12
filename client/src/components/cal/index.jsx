@@ -1,7 +1,8 @@
 import React from 'react';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import { Form, Col, Row, Button, Jumbotron } from 'react-bootstrap';
+import moment from 'moment';
+import { Form, Col, Row, Button, Jumbotron, Container } from 'react-bootstrap';
 import API from '../../api'
 import './calstyle.css'
 import { Formik } from 'formik';
@@ -43,17 +44,12 @@ export default class DayInput extends React.Component {
                     xDates.push(item.date_n)
                 }),
                 this.setState({ exclDates: xDates })
-
-
-                // this.setState({ exclDates: res.data })
             )
             .catch(err => console.log(err));
     };
     loadProfile = () => {
         API.getProfile()
             .then(res => {
-                // this.props.onLoginData(res.data)
-                console.log(res.data[0]);
                 this.setState(res.data[0])
             }
             )
@@ -64,16 +60,13 @@ export default class DayInput extends React.Component {
         if (modifiers.disabled) {
             return;
         }
-        console.log(this.state.selectedDay);
+        // console.log(moment(day).format('MM-DD-YYYY'));
         this.setState({
-            selectedDay: modifiers.selected ? undefined : day,
+            selectedDay: modifiers.selected ? undefined : moment(day).format('MM-DD-YYYY'),
         });
     }
 
-    handleChange(e) {
-        e.preventDefault();
-        console.log(e.target.value)
-    }
+
 
     render() {
         const {
@@ -81,6 +74,7 @@ export default class DayInput extends React.Component {
             last_Name,
             email,
             company,
+            location,
             street_address,
             city,
             state,
@@ -106,12 +100,27 @@ export default class DayInput extends React.Component {
             selected: this.state.selectedDay
         }
         const Style = {
-            input: {
-                borderBottom: 'solid black 1px',
+            header: {
                 padding: 0,
-                maxWidth: '80%'
+                margin: 0,
+                backgroundColor: '#2A9FD6',
+
             },
+            body: {
+                backgroundColor: 'white',
+            },
+            title: {
+                color: 'black',
+            },
+            label: {
+                marginBottom: 4,
+            },
+            input: {
+                border: 'solid black 1px',
+
+            }
         }
+
         const modifiersStyles = {
             selected: {
                 color: 'red'
@@ -142,24 +151,31 @@ export default class DayInput extends React.Component {
                         />
                         <p>
                             {this.state.selectedDay
-                                ? this.state.selectedDay.toLocaleDateString()
-                                : 'Please select a day 👻'}
+                                ? this.state.selectedDay
+                                : 'Please select a day'}
                         </p>
                     </Col>
 
                     <Formik
-                        initialValues=''
+                        initialValues={{
+                            first_Name: this.state.first_Name,
+                            last_Name: this.state.last_Name,
+                            email: this.state.email,
+                            location: this.state.location,
+                            street_address: this.state.street_address,
+                            city: this.state.city,
+                            state: this.state.state,
+                            zip: this.state.zip,
+                            work_phone: this.state.work_phone,
+                            cell_phone: this.state.cell_phone,
+                            company: this.state.company,
+                            start_time: '8:00 AM',
+                            end_time: '4:00 PM',
+                            num_avail: 100,
+                            check: false
+                        }}
                         validationSchema=''
-                    // onSubmit={async (values, formikBag) => {
-                    //     try {
-                    //         const data = await API.setDates(values);
-                    //         data.success ? props.onLogin(data.tokens) : formikBag.setErrors(data.errors);
 
-                    //     } catch (err) {
-                    //         formikBag.setStatus(err);
-                    //     }
-                    //     return;
-                    // }}
                     >
                         {({
                             status,
@@ -174,26 +190,33 @@ export default class DayInput extends React.Component {
                         }) => (
                                 <Col md={6}>
                                     <Form noValidate >
-                                        <Form.Group style={Style.input} as={Col} md="6" controlId="date">
+                                        <Form.Group as={Col} md="8" controlId="date">
+                                            <Form.Label style={Style.label}>Event Date</Form.Label>
                                             <Form.Control
+                                                style={Style.input}
                                                 placeholder="Date"
                                                 value={this.state.selectedDay}
-                                                onChange={this.state.handleChange}
+                                                onChange={handleChange}
                                             />
                                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                         </Form.Group>
 
-                                        <Form.Group style={Style.input} as={Col} md="6" controlId="location">
+                                        <Form.Group as={Col} md="8" controlId="location">
+                                            <Form.Label style={Style.label}>Event Location</Form.Label>
                                             <Form.Control
                                                 placeholder="Location"
-                                                onChange={this.state.handleChange}
+                                                value={values.location}
+                                                onChange={handleChange}
+                                                style={Style.input}
                                             />
                                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                         </Form.Group>
-                                        <Form.Group style={Style.input} as={Col} md="6" controlId="startTime">
-                                            <Form.Label>Start Time</Form.Label>
+                                        <Form.Group as={Col} md="8" controlId="startTime">
+                                            <Form.Label style={Style.label}>Start Time</Form.Label>
                                             <Form.Control as="select"
-                                                onChange={this.state.handleChange}
+                                                onChange={handleChange}
+                                                style={Style.input}
+                                                value={values.start_time}
                                             >
                                                 <option>8:00</option>
                                                 <option>9:00</option>
@@ -202,10 +225,12 @@ export default class DayInput extends React.Component {
                                                 <option>12:00</option>
                                             </Form.Control>
                                         </Form.Group>
-                                        <Form.Group style={Style.input} as={Col} md="6" controlId="endTime">
-                                            <Form.Label>End Time</Form.Label>
+                                        <Form.Group as={Col} md="8" controlId="endTime">
+                                            <Form.Label style={Style.label}>End Time</Form.Label>
                                             <Form.Control as="select"
-                                                onChange={this.state.handleChange}
+                                                onChange={handleChange}
+                                                value={values.end_time}
+                                                style={Style.input}
                                             >
                                                 <option>2:00</option>
                                                 <option>3:00</option>
@@ -214,6 +239,15 @@ export default class DayInput extends React.Component {
                                                 <option>6:00</option>
                                             </Form.Control>
                                         </Form.Group>
+                                        <Form.Group as={Col} md="8" controlId="num_avail">
+                                            <Form.Label style={Style.label}>Number of Onsite Employees</Form.Label>
+                                            <Form.Control
+                                                value={values.num_avail}
+                                                onChange={handleChange}
+                                                style={Style.input}
+                                            />
+                                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                        </Form.Group>
                                         <Form.Row className="justify-content-center">
                                             <Col sm={10} ml={2}>
                                                 <Button size="md"
@@ -221,9 +255,19 @@ export default class DayInput extends React.Component {
                                                     type="submit"
                                                     block
                                                     disabled={isSubmitting}
-                                                    onClick={() => this.setState({ submitFormOpen: true, submitFormDisp: 'd-block' })}
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        this.setState({
+                                                            location: values.location,
+                                                            start_time: values.start_time,
+                                                            end_time: values.end_time,
+                                                            numavail: values.numavail,
+
+                                                        })
+                                                    }
+                                                    }
                                                 >
-                                                    Schedule Event
+                                                    Review Event Details
                                     </Button>
                                             </Col>
                                         </Form.Row>
@@ -233,11 +277,132 @@ export default class DayInput extends React.Component {
                             )}
                     </Formik>
                 </Row>
-                <Jumbotron>
-                    {
-                        submitFormOpen && <div>Form Goes Here</div>
-                    }
-                </Jumbotron>
+                <Container>
+                    <Form>
+                        <Form.Row>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}> Company </Form.Label>
+                                <Form.Control
+                                    style={Style.input}
+                                    defaultValue={this.state.company}
+                                    ref={this.input}
+                                />
+                            </Form.Group>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}> Contact Name</Form.Label>
+                                <Form.Control
+                                    style={Style.input}
+                                    defaultValue={this.state.first_Name}
+                                    ref={this.input}
+                                />
+
+                            </Form.Group>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}> Location </Form.Label>
+                                <Form.Control style={Style.input}
+                                    defaultValue={this.state.location}
+                                    ref={this.input}
+                                />
+
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}>Contact Email</Form.Label>
+                                <Form.Control
+                                    style={Style.input}
+                                    defaultValue={this.state.email}
+                                    ref={this.input}
+                                />
+
+
+                            </Form.Group>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}>Contact Phone</Form.Label>
+                                <Form.Control
+                                    style={Style.input}
+                                    defaultValue={this.state.work_phone}
+                                    ref={this.input}
+                                />
+                            </Form.Group>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}> Onsite Employees </Form.Label>
+                                <Form.Control
+                                    style={Style.input}
+                                    defaultValue='100'
+                                    type='number'
+                                    ref={this.input}
+                                />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}>Street Address</Form.Label>
+                                <Form.Control
+                                    style={Style.input}
+                                    defaultValue={this.state.street_address}
+                                    ref={this.input}
+                                />
+                            </Form.Group>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}>City</Form.Label>
+                                <Form.Control
+                                    style={Style.input}
+                                    defaultValue={this.state.city}
+                                    ref={this.input}
+                                />
+                            </Form.Group>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}>State</Form.Label>
+                                <Form.Control
+                                    style={Style.input}
+                                    defaultValue={this.state.state}
+                                    ref={this.input}
+                                />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}>Start Time</Form.Label>
+                                <Form.Control style={Style.input}
+                                    defaultValue={this.state.start_time}
+                                    ref={this.input}
+                                />
+
+                            </Form.Group>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}>End Time</Form.Label>
+                                <Form.Control style={Style.input}
+                                    defaultValue={this.state.end_time}
+                                    ref={this.input}
+                                />
+                            </Form.Group>
+                            <Form.Group as={Col} md="4">
+                                <Form.Label style={Style.label}>Date</Form.Label>
+                                <Form.Control style={Style.input}
+                                    defaultValue={this.state.selectedDay}
+                                    ref={this.input}
+                                />
+                            </Form.Group>
+                        </Form.Row>
+                    </Form>
+                    <Row>
+                        <Col>
+                            Company: {this.state.company}
+                        </Col>
+                        <Col>
+                            Date: {this.state.selectedDay}
+                        </Col>
+                        <Col>
+                            Location:{this.state.location}
+                        </Col>
+                    </Row>
+                    <div>
+                        You have selected {this.state.selectedDay} at {this.state.location}
+                    </div>
+
+
+                </Container>
             </>
         );
     }
