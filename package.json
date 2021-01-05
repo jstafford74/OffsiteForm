@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@18f/us-federal-holidays": "^1.4.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "chai": "^4.2.0",
     "concurrently": "^5.1.0",
